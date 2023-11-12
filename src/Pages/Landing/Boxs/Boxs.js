@@ -1,4 +1,5 @@
 import { LinkButton } from "../../../Components/Buttons"
+import { PrimaryColor, box1Image } from "../../../Components/Variables"
 
 export const Box1 = () => {
     return(
@@ -12,12 +13,12 @@ export const Box1 = () => {
                 </p>
                 
                 <div className='buttons flex flex-row items-center space-x-4'>
-                    <LinkButton link="/login" text="Log in" bgColor="white" color="#219ebc" border="#219ebc" />
-                    <LinkButton link="/signup" text="Join for free" bgColor="#219ebc" color="white" border="#219ebc" />
+                    <LinkButton link="/login" text="Log in" bgColor="white" color={PrimaryColor} border={PrimaryColor} width={1} />
+                    <LinkButton link="/signup" text="Join for free" bgColor={PrimaryColor} color="white" border={PrimaryColor}width={1}  />
                 </div>
             </div>
             <div className="w-full md:w-1/2 lg:w-1/3 justify-center md:justify-end flex mb-10 md:mb-0">
-                <img src="./assets/images/box1.webp" className="max-w-sm md:w-full" />
+                <img src={box1Image} className="max-w-sm md:w-full" />
             </div>
         </div>
     )
@@ -27,7 +28,7 @@ export const Box2 = () => {
     return(
         <div className="flex text-white flex-col md:flex-row justify-between my-28 px-10 md:px-20 lg:px-60 py-20 md:space-x-6" style={{backgroundColor: "#14213d"}}>
             <div className="w-full md:w-1/2 lg:w-1/3 justify-center md:justify-end flex mb-10 md:mb-0">
-                <img src="./assets/images/box1.webp" className="max-w-sm md:w-full" />
+                <img src={box1Image} className="max-w-sm md:w-full" />
             </div>
             <div className="w-full md:w-1/2">
                 <h1 className=" font-medium text-4xl"> Discover Top Instructors Around The World </h1>
@@ -38,7 +39,7 @@ export const Box2 = () => {
                 </p>
                 
                 <div className='buttons flex flex-row items-center space-x-4'>
-                    <LinkButton link="/courses" text="Discover more" bgColor="#219ebc" color="white" border="#219ebc" />
+                    <LinkButton link="/courses" text="Discover more" bgColor={PrimaryColor} color="white" border={PrimaryColor} />
                 </div>
             </div>
         </div>
@@ -57,11 +58,11 @@ export const Box3 = () => {
                 </p>
                 
                 <div className='buttons flex flex-row items-center space-x-4'>
-                    <LinkButton link="/categories" text="All Categories" bgColor="white" color="#219ebc" border="#219ebc" />
+                    <LinkButton link="/categories" text="All Categories" bgColor="white" color={PrimaryColor} border={PrimaryColor} />
                 </div>
             </div>
             <div className="w-full md:w-1/2 lg:w-1/3 justify-center md:justify-end flex mb-10 md:mb-0">
-                <img src="./assets/images/box1.webp" className=" max-w-sm md:w-full" />
+                <img src={box1Image} className=" max-w-sm md:w-full" />
             </div>
         </div>
     )
