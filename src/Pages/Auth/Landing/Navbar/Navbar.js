@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
-import { LinkButton } from '../../../Components/Buttons'
-import { PrimaryColor, WebsiteLogo } from '../../../Components/Variables';
+import { PrimaryColor, WebsiteLogo } from '../../../../Components/Variables';
+import { LinkButton } from '../../../../Components/Buttons';
 
 function Navbar() {
   const [activeNavbar, setActiveNavbar] = useState(false)

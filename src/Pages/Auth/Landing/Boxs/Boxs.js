@@ -1,5 +1,5 @@
-import { LinkButton } from "../../../Components/Buttons"
-import { PrimaryColor, box1Image } from "../../../Components/Variables"
+import { LinkButton } from "../../../../Components/Buttons"
+import { PrimaryColor, box1Image } from "../../../../Components/Variables"
 
 export const Box1 = () => {
     return(

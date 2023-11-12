@@ -1,6 +1,6 @@
 import React from 'react'
 import {BsFacebook, BsInstagram, BsTwitter} from 'react-icons/bs'
-import { WebsiteLogo } from '../../../Components/Variables'
+import { WebsiteLogo } from '../../../../Components/Variables'
 
 function Footer() {
   let date = new Date()

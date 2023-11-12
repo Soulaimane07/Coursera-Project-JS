@@ -1,17 +1,25 @@
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import './App.css';
 
-import Landing from './Pages/Landing/Landing';
+import Logged from './Stacks/Logged';
+import Auth from './Stacks/Auth';
+import { useEffect, useState } from 'react';
 
 function App() {
+  const [logged, setLogged] = useState(false)
+  const [user, setUser] = useState(null)
+  
+  useEffect(()=> {
+    let user = JSON.parse(localStorage.getItem("CourseraUser"))
+    setUser(user)
+    setLogged(true)
+  }, [user])
+
+  // let logged = false
+
   return (
-    <BrowserRouter>
-      <div className="App">
-        <Routes>
-          <Route path='/' element={<Landing />} />
-        </Routes>
-      </div>
-    </BrowserRouter>
+    <div className="App">
+      {logged ? <Logged /> : <Auth />}
+    </div>
   );
 }
 
