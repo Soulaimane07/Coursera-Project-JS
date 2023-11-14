@@ -3,18 +3,20 @@ import './App.css';
 import Logged from './Stacks/Logged';
 import Auth from './Stacks/Auth';
 import { useEffect, useState } from 'react';
+import { getUserData } from './Components/Functions';
 
 function App() {
   const [logged, setLogged] = useState(false)
-  const [user, setUser] = useState(null)
   
   useEffect(()=> {
-    let user = JSON.parse(localStorage.getItem("CourseraUser"))
-    setUser(user)
-    setLogged(true)
-  }, [user])
-
-  // let logged = false
+    let user = getUserData()
+    
+    if(user !== null | undefined){
+      setLogged(true)
+    } else {
+      setLogged(false)
+    }
+  }, [])
 
   return (
     <div className="App">

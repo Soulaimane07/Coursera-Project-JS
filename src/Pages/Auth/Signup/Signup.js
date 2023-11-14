@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { PrimaryColor, WebsiteLogo } from '../../../Components/Variables'
 import { Link } from 'react-router-dom'
 import { SubmitButton } from '../../../Components/Buttons'
-import { SignupFun } from '../../../Components/Functions'
+// import { SignupFun } from '../../../Components/Functions'
 
 function Signup() {
     const [fname, setFname] = useState("")
@@ -41,7 +41,7 @@ function Signup() {
                 <input onChange={(e)=> setPassword(e.target.value)} type="password" name="floating_password" id="floating_password" className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none outline-none" placeholder=" " required />
             </div>
 
-            <SubmitButton fun={SignupFun} text={"Sign Up"} bgColor={PrimaryColor} color={"white"} data={{email, password, fname, lname}} condition={email == "" || password == "" || fname == "" || lname == ""} />
+            <SubmitButton fun={null} text={"Sign Up"} bgColor={PrimaryColor} color={"white"} data={{email, password, fname, lname}} condition={email == "" || password == "" || fname == "" || lname == ""} />
             <p className='mt-10'> Have an account? <Link style={{color: PrimaryColor}} to={"/login"}> Login </Link> </p>
         </div>
     </div>
