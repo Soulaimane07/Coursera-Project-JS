@@ -1,6 +1,5 @@
 import axios from "axios"
 import { serverURL } from "./Variables"
-import { useNavigate } from "react-router-dom"
 
 export const LoginFun = (data, spinner, navigate) => {
     spinner(true)
@@ -10,7 +9,7 @@ export const LoginFun = (data, spinner, navigate) => {
             spinner(false)
             console.log(res.data);
             localStorage.setItem("CourseraUser", JSON.stringify(res.data))
-            // navigate("/")
+            navigate("/")
             window.location.reload()
         })
         .catch(err => {
@@ -18,13 +17,13 @@ export const LoginFun = (data, spinner, navigate) => {
         })
 }
 
-export const Signup = (data, spinner, navigate) => {
+export const SignupFun = (data, spinner, navigate) => {
     spinner(true)
+    console.log(data);
     
-    axios.post(`${serverURL}/login`, data)
+    axios.post(`${serverURL}/signup`, {...data, 'role':"etudiant"})
         .then(res => {
             spinner(false)
-            console.log(res.data);
             localStorage.setItem("CourseraUser", JSON.stringify(res.data))
             navigate("/")
             window.location.reload()
@@ -41,7 +40,7 @@ export const LogOut = (data, spinner, navigate) => {
         .then(res => {
             spinner(false)
             localStorage.removeItem("CourseraUser")
-            // navigate("/")
+            navigate("/")
             window.location.reload()
         })
         .catch(err => {
