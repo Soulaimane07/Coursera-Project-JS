@@ -16,21 +16,15 @@ function Home() {
     {
       "logo": "./assets/images/teacher.png", 
       "title": lang?.profs,
-      "total": 0,
-      "link":"/cours"
+      "total": GetData("/prof/index")?.length || 0,
+      "link":"/teachers"
     },
     {
       "logo": "./assets/images/student.png", 
       "title": lang?.groups,
       "total": 0,
-      "link":"/cours"
-    },
-    {
-      "logo": "./assets/images/cours.png", 
-      "title": lang?.cours,
-      "total": 0,
-      "link":"/cours"
-    },
+      "link":"/groups"
+    }
   ]
 
   return (

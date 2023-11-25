@@ -7,6 +7,7 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import Cours from './Layout/Cours'
 import { GetLang } from '../../../Components/Functions'
 import Profile from './Layout/Profile'
+import Teachers from './Layout/Teachers'
 
 function Admin() {
   let lang = GetLang()?.data.dashboard
@@ -18,16 +19,12 @@ function Admin() {
     },
     {
         "title": lang?.profs,
-        "link":"/profs"
+        "link":"/teachers"
     },
     {
       "title": lang?.groups,
       "link":"/groupes"
-    },
-    {
-        "title": lang?.cours,
-        "link":"/something"
-    },
+    }
   ]
 
   return (
@@ -37,6 +34,7 @@ function Admin() {
         <Routes>
           <Route path='/' element={<Home />} />
           <Route path='/courses' element={<Cours />} />
+          <Route path='/teachers' element={<Teachers />} />
           <Route path='/profile' element={<Profile />} />
           <Route path='/*' element={<Something />} />
         </Routes>

@@ -18,6 +18,11 @@
                 "startDate":"Start date",
                 "endDate":"End date"
             },
+            "teachers":{
+                "teachers":"Teachers",
+                "createteacher": "Create a teacher"
+
+            },
             "form":{
                 "email":"Email Address",
                 "fname":"First Name",
@@ -49,6 +54,11 @@
                 "startDate":"Date de début",
                 "endDate":"Date de fin"
             },
+            "teachers":{
+                "teachers":"Professeurs",
+                "createteacher": "Créer un professeur"
+
+            },
             "form":{
                 "email":"Adresse e-mail",
                 "fname":"Prénom",
@@ -79,6 +89,11 @@
                 "createCour": "إنشاء دورة",
                 "startDate":"تاريخ البدء",
                 "endDate":"تاريخ الانتهاء"
+            },
+            "teachers":{
+                "teachers":"المدرسون",
+                "createteacher": "إنشاء مدرس"
+
             },
             "form":{
                 "email":"عنوان البريد الإلكتروني",
