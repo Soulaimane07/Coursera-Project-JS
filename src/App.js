@@ -9,7 +9,7 @@ function App() {
   const [logged, setLogged] = useState(false)
   
   useEffect(()=> {
-    let user = getUserData()
+    let user = getUserData() 
     
     if(user !== null | undefined){
       setLogged(true)
