@@ -1,19 +1,35 @@
 import axios from "axios"
 import { serverURL } from "./Variables"
+import { useEffect, useState } from "react"
 
-export const LoginFun = (data, spinner, navigate) => {
+
+
+
+
+// ----------------- Authentification
+
+export const LoginFun = (data, spinner, navigate, message) => {
     spinner(true)
+    message(false)
     
     axios.post(`${serverURL}/login`, data)
         .then(res => {
-            spinner(false)
-            console.log(res.data);
-            localStorage.setItem("CourseraUser", JSON.stringify(res.data))
-            navigate("/")
-            window.location.reload()
+            if(res.data){
+                spinner(false)
+                console.log(res.data)
+                localStorage.setItem("CourseraUser", JSON.stringify(res.data))
+                navigate("/")
+                window.location.reload()
+            } else {
+                // message(err.response.data.message),
+                console.log(res);
+                spinner(false)
+            }
         })
         .catch(err => {
             console.log(err);
+            message(err.response.data.message)
+            spinner(false)
         })
 }
 
@@ -50,4 +66,75 @@ export const LogOut = (data, spinner, navigate) => {
 
 export const getUserData = () => {
     return JSON.parse(localStorage.getItem("CourseraUser"))
+}
+
+
+
+// ----------------- CRUD
+
+export const GetData = (link, roal) => {
+    const [data, setData] = useState(null)
+
+    useEffect(()=> {
+        axios.get(`${serverURL}${link}`)
+            .then(res => {
+                setData(res.data)
+            })
+            .catch(err => {
+                console.log(err);
+            })
+    }, [roal && data])
+
+    return data
+}
+
+export const PostData = (data, spinner, navigate, be, link) => {
+    spinner(true)
+
+    axios.post(`${serverURL}${link}`, data, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      })
+        .then(res => {
+            spinner(false)
+            console.log(res.data);
+            window.location.reload()
+        })
+        .catch(err => {
+            spinner(false)
+            console.log(err);
+        })
+}
+
+export const DeleteData = (data, spinner, navigate, be, link) => {
+    spinner(true)
+
+    axios.delete(`${serverURL}${link}`)
+        .then(res =>{
+            spinner(false)
+            console.log(res.data);
+            window.location.reload()
+        })
+        .catch(err => {
+            console.log(err);
+        })
+}
+
+export const UpdateData = (data, spinner, navigate, be, link) => {
+    spinner(true)
+
+    axios.put(`${serverURL}${link}`, data, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      })
+        .then(res =>{
+            spinner(false)
+            console.log(res.data);
+            window.location.reload()
+        })
+        .catch(err => {
+            console.log(err);
+        })
 }

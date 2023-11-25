@@ -7,6 +7,7 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import {RxDashboard} from 'react-icons/rx'
 import {BsBook} from 'react-icons/bs'
 import {BiUser} from 'react-icons/bi'
+import Cours from './Layout/Cours'
 
 function Admin() {
   const pages = [
@@ -34,10 +35,11 @@ function Admin() {
 
   return (
     <BrowserRouter>
-      <div className=' h-screen text-gray-900 mt-16'>
+      <div className='h-screen mt-16'>
         <Navbar pages={pages} />
         <Routes>
           <Route path='/' element={<Home />} />
+          <Route path='/courses' element={<Cours />} />
           <Route path='/*' element={<Something />} />
         </Routes>
       </div>
