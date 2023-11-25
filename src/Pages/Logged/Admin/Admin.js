@@ -4,42 +4,40 @@ import Something from '../Something'
 import Home from './Layout/Home'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 
-import {RxDashboard} from 'react-icons/rx'
-import {BsBook} from 'react-icons/bs'
-import {BiUser} from 'react-icons/bi'
 import Cours from './Layout/Cours'
+import { GetLang } from '../../../Components/Functions'
+import Profile from './Layout/Profile'
 
 function Admin() {
+  let lang = GetLang()?.data.dashboard
+
   const pages = [
     {
-        "icon": <BsBook />,
-        "title":"Courses",
+        "title": lang?.cours,
         "link":"/courses"
     },
     {
-      "icon": <BsBook />,
-      "title":"Groupes",
-      "link":"/groupes"
-    },
-    {
-        "icon": <BiUser />,
-        "title":"Professeurs",
+        "title": lang?.profs,
         "link":"/profs"
     },
     {
-        "icon": <BsBook />,
-        "title":"Something",
+      "title": lang?.groups,
+      "link":"/groupes"
+    },
+    {
+        "title": lang?.cours,
         "link":"/something"
     },
   ]
 
   return (
     <BrowserRouter>
-      <div className='h-screen mt-16'>
+      <div className='h-screen mt-20'>
         <Navbar pages={pages} />
         <Routes>
           <Route path='/' element={<Home />} />
           <Route path='/courses' element={<Cours />} />
+          <Route path='/profile' element={<Profile />} />
           <Route path='/*' element={<Something />} />
         </Routes>
       </div>

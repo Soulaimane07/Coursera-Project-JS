@@ -1,4 +1,5 @@
-import React, { createContext } from 'react'
-import { getUserData } from './Functions'
+import { createContext } from 'react'
+import { GetLang, getUserData } from './Functions'
 
 export const userContexts = createContext(getUserData())
+export const langContexts = createContext(GetLang("Arabic"))

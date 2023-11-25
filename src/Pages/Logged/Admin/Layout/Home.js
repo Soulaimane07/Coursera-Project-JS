@@ -1,44 +1,43 @@
 import React from 'react'
 import Header from '../../Header'
-import { GetData } from '../../../../Components/Functions'
+import { GetData, GetLang } from '../../../../Components/Functions'
 import { Card } from '../../../../Layout/Cards'
 
-import { MdLibraryBooks } from "react-icons/md";
-
-
 function Home() {
+  let lang = GetLang()?.data.dashboard
+
   const cards =[
     {
-      "logo": <MdLibraryBooks size={40} />, 
-      "title": "Cours",
+      "logo": "./assets/images/cours.png", 
+      "title": lang?.cours,
       "total": GetData("/cours/index")?.length || 0,
       "link":"/courses"
     },
     {
-      "logo": <MdLibraryBooks size={40} />, 
-      "title": "Professeurs",
+      "logo": "./assets/images/teacher.png", 
+      "title": lang?.profs,
       "total": 0,
       "link":"/cours"
     },
     {
-      "logo": <MdLibraryBooks size={40} />, 
-      "title": "Etudiants",
+      "logo": "./assets/images/student.png", 
+      "title": lang?.groups,
       "total": 0,
       "link":"/cours"
     },
     {
-      "logo": <MdLibraryBooks size={40} />, 
-      "title": "Cours",
+      "logo": "./assets/images/cours.png", 
+      "title": lang?.cours,
       "total": 0,
       "link":"/cours"
     },
   ]
 
   return (
-    <div className='w-full py-10 px-20'>
-      <Header title="Dashboard Admin" />
+    <div className='w-full py-10 px-6 md:px-20'>
+      <Header title={lang?.dashboard} />
 
-      <div className='flex flex-wrap mt-4'>
+      <div className='flex flex-wrap mt-4 justify-center'>
         {cards.map((item,key)=>{
           return <Card key={key} title={item.title} logo={item.logo} total={item.total} link={item.link}   />
         })}

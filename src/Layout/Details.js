@@ -5,8 +5,8 @@ import { DeleteData } from "../Components/Functions";
 
 export const DetailCour = ({detailsCour, setDetailsCour, setUpdateCour}) => {
     return (
-        <div className="fixed top-0 left-0 h-screen bg-gray-800 bg-opacity-40 w-full flex justify-end">
-            <div className=" rounded-md bg-white shadow-2xl w-2/6 flex flex-col">
+        <div className="fixed z-20 top-0 left-0 h-screen bg-gray-800 bg-opacity-40 w-full flex justify-end">
+            <div className=" rounded-md bg-white shadow-2xl w-full md:1/2 lg:w-2/6 mx-10 md:mx-20 lg:mx-0">
                 <div className=" relative text-center py-4 font-medium text-xl border-b-2 border-gray-500">
                     <h2>
                      {detailsCour?.libelle}

@@ -5,6 +5,7 @@ import { Link, NavLink } from 'react-router-dom'
 import { userContexts } from '../../Components/Contexts'
 import { LogOut } from '../../Components/Functions'
 import { SubmitButton } from '../../Components/Buttons'
+import { IoMdSettings } from "react-icons/io";
 
 function Navbar({pages}) {
     let user = useContext(userContexts)
@@ -13,9 +14,11 @@ function Navbar({pages}) {
     const [openOptions, setOpenOptions] = useState(false)
 
 
+
+
   return (
-      <nav className="fixed top-0 left-0 w-full bg-gray-100 dark:bg-gray-800">
-         <div className="mx-auto px-4 md:px-20 py-5">
+      <nav className="fixed z-10 top-0 left-0 w-full bg-gray-100 dark:bg-gray-800">
+         <div className="mx-auto px-6 md:px-20 py-5">
             <div className="flex items-center justify-between">
                <div className="flex items-center">
                   <Link to={"/"} className="flex-shrink-0">
@@ -24,21 +27,41 @@ function Navbar({pages}) {
                   <div className="hidden md:block">
                      <div className="ml-10 flex items-baseline space-x-4">
                         {pages.map((item,key)=>(
-                           <Link key={key} to={item.link} className="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium" aria-current="page">
+                           <NavLink 
+                              key={key} 
+                              to={item.link} 
+                              className={({ isActive }) =>
+                                 `text-gray-300  hover:text-white hover:bg-gray-700 rounded-md px-3 py-2 text-sm font-medium ${isActive && " bg-gray-600 text-white"}`
+                              }
+                           >
                               {item.title}
-                           </Link>
+                           </NavLink>
                         ))}
                      </div>
                   </div>
                </div>
                <div className="hidden md:block">
-                  <div className="ml-4 flex items-center md:ml-6">
+                  <div className="ml-4 flex items-center md:ml-6 space-x-4">
+                        <NavLink 
+                           to="/profile" 
+                           className={({ isActive }) =>
+                              `text-gray-300 hover:text-white hover:bg-gray-700 rounded-md px-3 py-2 text-sm font-medium ${isActive && " bg-gray-600 text-white"}`
+                           }
+                        >
+                           <IoMdSettings size={24} />
+                        </NavLink>
                      <div className="relative ml-3">
                         <div>
-                           <button onClick={()=> setOpenOptions(!openOptions)} type="button" className="relative flex max-w-xs items-center rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800" id="user-menu-button" aria-expanded="false" aria-haspopup="true">
-                              <span className="absolute -inset-1.5"></span>
-                              <span className="sr-only">Open user menu</span>
-                              <img className="h-8 w-8 rounded-full" src={ProfileImage} alt="" />
+                           
+                           
+                           <button 
+                              style={{ 
+                                 backgroundImage: `url("./assets/images/user.png")`,
+                              }} 
+                              onClick={()=> setOpenOptions(!openOptions)} 
+                              type="button" 
+                              className="BGImage w-10 h-10 border-4 relative flex max-w-xs items-center rounded-full bg-gray-100 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800" 
+                           >
                            </button>
                         </div>
 
@@ -73,9 +96,15 @@ function Navbar({pages}) {
          <div className={`md:hidden ${openNav ? 'inline' : 'hidden'}`} id="mobile-menu">
             <div className="space-y-1 px-2 pb-3 pt-2 sm:px-3">
                {pages.map((item,key)=>(
-                  <Link key={key} to={item.link} className="text-gray-300 hover:bg-gray-700 hover:text-white block rounded-md px-3 py-2 text-base font-medium">
+                  <NavLink 
+                     key={key} 
+                     to={item.link} 
+                     className={({ isActive }) =>
+                        `text-gray-300 hover:bg-gray-700 hover:text-white block rounded-md px-3 py-2 text-base font-medium ${isActive && " bg-gray-600 text-white"}`
+                     }
+                  >
                      {item.title}
-                  </Link>
+                  </NavLink>
                ))}
             </div>
 

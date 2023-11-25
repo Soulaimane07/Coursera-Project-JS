@@ -1,10 +1,27 @@
 import axios from "axios"
 import { serverURL } from "./Variables"
 import { useEffect, useState } from "react"
+import Langs from "./Langs.json"
 
 
 
+export const GetLang = () => {
+    let langSub = JSON.parse(localStorage.getItem("CourseraLang"))
+    
+    let lang = Langs.frensh
 
+    langSub === "en" && (lang = Langs.english)
+    langSub === "fr" && (lang = Langs.frensh)
+    langSub === "ar" && (lang = Langs.arabic)
+    langSub === undefined && (lang = Langs.frensh)
+
+    return lang
+}
+
+export const setLang = (lang) => {
+    localStorage.setItem("CourseraLang", JSON.stringify(lang))
+    window.location.reload()
+}
 
 // ----------------- Authentification
 
@@ -79,11 +96,12 @@ export const GetData = (link, roal) => {
         axios.get(`${serverURL}${link}`)
             .then(res => {
                 setData(res.data)
+                console.log(res.data);
             })
             .catch(err => {
                 console.log(err);
             })
-    }, [roal && data])
+    }, [])
 
     return data
 }

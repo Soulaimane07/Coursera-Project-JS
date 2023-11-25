@@ -1,0 +1,95 @@
+{
+    "english":{
+        "title":"English",
+        "subTitle":"en",
+        "data":{
+            "dashboard":{
+                "dashboard":"Dashboard",
+                "cours": "Courses",
+                "profs":"Teachers",
+                "groups":"Groups"
+            },
+            "profile":{
+                "profile":"Profile"
+            },
+            "courses":{
+                "cours": "Courses",
+                "createCour": "Create a course",
+                "startDate":"Start date",
+                "endDate":"End date"
+            },
+            "form":{
+                "email":"Email Address",
+                "fname":"First Name",
+                "lname":"Last Name",
+                "language":"Language"
+            },
+            "buttons":{
+                "login":"Login",
+                "logout":"Sign out"
+            }
+        }
+    },
+    "frensh":{
+        "title":"Francais",
+        "subTitle":"fr",
+        "data":{
+            "dashboard":{
+                "dashboard":"Tableau de bord",
+                "cours": "Cours",
+                "profs":"Professeurs",
+                "groups":"Groups"
+            },
+            "profile":{
+                "profile":"Profil"
+            },
+            "courses":{
+                "cours": "Cours",
+                "createCour": "Créer un cours",
+                "startDate":"Date de début",
+                "endDate":"Date de fin"
+            },
+            "form":{
+                "email":"Adresse e-mail",
+                "fname":"Prénom",
+                "lname":"Nom de famille",
+                "language": "langue"
+            },
+            "buttons":{
+                "login":"Connexion",
+                "logout":"Déconnecter"
+            }
+        }
+    },
+    "arabic":{
+        "title":"اللغة العربية",
+        "subTitle":"ar",
+        "data":{
+            "dashboard":{
+                "dashboard":"لوحة القيادة",
+                "cours": "الدورات",
+                "profs":"الاساتذة",
+                "groups":"المجموعات"
+            },
+            "profile":{
+                "profile":"الملف الشخصي"
+            },
+            "courses":{
+                "cours": "الدورات",
+                "createCour": "إنشاء دورة",
+                "startDate":"تاريخ البدء",
+                "endDate":"تاريخ الانتهاء"
+            },
+            "form":{
+                "email":"عنوان البريد الإلكتروني",
+                "fname":"الاسم الأول",
+                "lname":"اسم العائلة",
+                "language":"اللغة"
+            },
+            "buttons":{
+                "logout":"تسجيل الخروج",
+                "login":"تسجيل الدخول"
+            }
+        }
+    }
+}
