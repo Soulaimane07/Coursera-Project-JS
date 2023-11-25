@@ -21,14 +21,14 @@ export const LinkButton = ({link, text, bgColor, color, border, width}) => {
     )
 }
 
-export const SubmitButton = ({text, bgColor, color, border, data, fun, condition}) => {
+export const SubmitButton = ({text, bgColor, color, border, data, fun, condition, message, link}) => {
     const [spinner, setSpinner] = useState(false)
     let navigate = useNavigate()
 
     return(
         <button 
             disabled={condition}
-            onClick={()=> fun(data, setSpinner, navigate)} 
+            onClick={()=> fun(data, setSpinner, navigate, message, link)} 
             style={{backgroundColor: bgColor, color: color}} 
             className={`w-full py-3 rounded-md flex justify-center ${condition ? 'opacity-50' : 'opacity-100'}`}
         >

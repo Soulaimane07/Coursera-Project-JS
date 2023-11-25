@@ -14,7 +14,7 @@ function Navbar({pages}) {
 
 
   return (
-      <nav className="fixed top-0 left-0 w-full bg-gray-800">
+      <nav className="fixed top-0 left-0 w-full bg-gray-100 dark:bg-gray-800">
          <div className="mx-auto px-4 md:px-20 py-5">
             <div className="flex items-center justify-between">
                <div className="flex items-center">
