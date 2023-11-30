@@ -1,6 +1,6 @@
 import React from 'react'
 import Header from '../../Header'
-import { DeleteData, GetData, GetLang, PageTitle, UpdateData } from '../../../../Components/Functions'
+import { DeleteData, GetData, GetLang, PageTitle } from '../../../../Components/Functions'
 import { useState } from 'react'
 import { CreateTeacher } from '../../../../Layout/Create'
 import { DetailProf } from '../../../../Layout/Details'
@@ -49,24 +49,24 @@ function Teachers() {
                 </thead>
                 <tbody>
                     {teachers?.map((item,key)=>(
-                        <tr key={key} className='bg-blue-500 border-b-2 border-blue-500'>
-                            <th scope="row" className="px-6 py-4 font-medium text-blue-900 whitespace-nowrap dark:text-white">
+                        <tr key={key} className='bg-blue-100 border-b-2 border-blue-200 text-gray-700'>
+                            <th scope="row" className="px-6 py-4 font-medium whitespace-nowrap">
                                 {item.email}
                             </th>
-                            <td className="px-6 py-4 text-gray-200">
+                            <td className="px-6 py-4">
                                 {item.prenom}
                             </td>
-                            <td className="px-6 py-4 text-gray-200">
+                            <td className="px-6 py-4">
                                 {item.nom}
                             </td>
-                            <td className="px-0 py-4 space-x-3">
-                                <button onClick={()=> setDetailsProf(item)} className='px-1 text-white opacity-70 hover:opacity-100 transition-all'>
+                            <td className="">
+                                <button onClick={()=> setDetailsProf(item)} className='px-2 opacity-70 hover:opacity-100 transition-all'>
                                     <BiDetail size={20} />
                                 </button>
-                                <button onClick={()=> setUpdateProf(item)} className='px-1 text-white opacity-70 hover:opacity-100 transition-all'>
+                                <button onClick={()=> setUpdateProf(item)} className='px-2 opacity-70 hover:opacity-100 transition-all'>
                                     <LuPenSquare size={18} />
                                 </button>
-                                <button onClick={()=> DeleteData(null, spinner, null, null, `/prof/destroy/${item?.id}`)} className='px-1 text-white opacity-70 hover:opacity-100 transition-all'>
+                                <button onClick={()=> DeleteData(null, spinner, null, null, `/prof/destroy/${item?.id}`)} className='px-2 opacity-70 hover:opacity-100 transition-all'>
                                     <FaRegTrashAlt size={18} />
                                 </button>
                             </td>

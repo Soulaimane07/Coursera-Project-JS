@@ -102,7 +102,7 @@ export const GetData = (link, roal) => {
         axios.get(`${serverURL}${link}`)
             .then(res => {
                 setData(res.data)
-                console.log(res.data);
+                // console.log(res.data);
             })
             .catch(err => {
                 console.log(err);
@@ -142,16 +142,17 @@ export const DeleteData = (data, spinner, navigate, be, link) => {
         })
         .catch(err => {
             console.log(err);
+            spinner(false)
         })
 }
 
 export const UpdateData = (data, spinner, navigate, be, link) => {
     spinner(true)
 
-    axios.put(`${serverURL}${link}`, data, {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
+    axios.put(`${serverURL}${link}`, data,{
+        // headers: {
+        //   "Content-Type": "multipart/form-data",
+        // },
       })
         .then(res =>{
             spinner(false)
@@ -160,5 +161,6 @@ export const UpdateData = (data, spinner, navigate, be, link) => {
         })
         .catch(err => {
             console.log(err);
+            spinner(false)
         })
 }

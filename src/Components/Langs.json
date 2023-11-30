@@ -38,7 +38,14 @@
                 "teacher":"Teacher",
                 "affected":"Affected courses",
                 "affecter":"Assign course",
-                "cours": "Courses"
+                "cours": "Courses",
+                "update":"Update",
+                "create":"Create"
+            },
+            "groups":{
+                "groups":"Groups",
+                "creategroup": "Create a Group"
+                
             },
             "form":{
                 "email":"Email Address",
@@ -90,6 +97,11 @@
                 "affected":"Les cours affectés",
                 "affecter":"Affecter un cour",
                 "cours": "Cours"
+            },
+            "groups":{
+                "groups":"Groupes",
+                "creategroup": "Créer un groupe"
+                
             },
             "form":{
                 "email":"Adresse e-mail",
@@ -144,6 +156,11 @@
                 "affected":"الدورات المعنات",
                 "affecter":"تعيين دورة",
                 "cours": "الدورات"
+            },
+            "groups":{
+                "groups":"المجموعات",
+                "creategroup": "إنشاء مجموعة"
+                
             },
             "form":{
                 "email":"عنوان البريد الإلكتروني",

@@ -12,7 +12,7 @@ function Home() {
     {
       "logo": "./assets/images/cours.png", 
       "title": lang?.cours,
-      "total": GetData("/cours/index")?.length || 0,
+      "total": 0,
       "link":"/courses"
     },
     {

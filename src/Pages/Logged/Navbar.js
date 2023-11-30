@@ -108,14 +108,14 @@ function Navbar({pages}) {
             </div>
 
             <div className="border-t border-gray-700 pb-3 pt-4">
-               <div className="flex items-center px-2">
+               <Link to={"/profile"} className="flex items-center px-2">
                   <div className="ml-3">
                      <div className="text-base font-medium leading-none text-white mb-2"> {user?.fname} {user?.fname} </div>
                      <div className="text-sm font-medium leading-none text-gray-400"> {user?.email} </div>
                   </div>
-               </div>
+               </Link>
                <div className="space-y-1 px-4 mt-4">
-                  <SubmitButton text="Log out" bgColor={"#FF0303"} color={"white"} fun={LogOut} />
+                  <SubmitButton text="Log out" bgColor={"#4895ef"} color={"white"} fun={LogOut} />
                </div>
             </div>
          </div>

@@ -7,7 +7,7 @@ export const AdminCour = ({item, setDetailsCour, affect}) => {
     
     affect ?
         result = (
-            <button className='bg-gray-300 text-left w-full rounded-md px-6 py-5 mb-4 hover:shadow-xl transition-all flex flex-col'>
+            <button className=' bg-blue-100 text-left w-full rounded-md px-6 py-5 mb-4 hover:shadow-xl transition-all flex flex-col'>
                 <img src={`${uploadsURL}/${item.image}`} className='w-full rounded-md mb-4 ' />
                 
                 <div className='w-full'>
@@ -21,7 +21,7 @@ export const AdminCour = ({item, setDetailsCour, affect}) => {
             </button>
     )
     :   result = (
-        <button onClick={()=> setDetailsCour(item)} className='bg-gray-300 text-left w-full rounded-md px-6 py-5 mb-4 md:mx-2 hover:shadow-xl transition-all flex flex-col md:flex-row'>
+        <button onClick={()=> setDetailsCour(item)} className='bg-blue-100 text-left w-full rounded-md px-6 py-5 mb-4 md:mx-2 hover:shadow-xl transition-all flex flex-col md:flex-row'>
             <img src={`${uploadsURL}/${item.image}`} className='w-full md:w-52 rounded-md mb-4 md:mb-0' />
             
             <div className='ml-6 w-full'>

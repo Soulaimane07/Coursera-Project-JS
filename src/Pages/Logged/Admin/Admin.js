@@ -8,6 +8,7 @@ import Cours from './Layout/Cours'
 import { GetLang } from '../../../Components/Functions'
 import Profile from './Layout/Profile'
 import Teachers from './Layout/Teachers'
+import Group from './Layout/Group'
 
 function Admin() {
   let lang = GetLang()?.data.dashboard
@@ -35,7 +36,8 @@ function Admin() {
           <Route path='/' element={<Home />} />
           <Route path='/courses' element={<Cours />} />
           <Route path='/teachers' element={<Teachers />} />
-          <Route path='/profile' element={<Profile />} />
+          <Route path='/groupes' element={<Group />} />
+          <Route path='/profile' element={<Profile pageTitle={"Admin - Profile"} />} />
           <Route path='/*' element={<Something />} />
         </Routes>
       </div>

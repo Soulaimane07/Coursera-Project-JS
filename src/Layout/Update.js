@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { AiOutlineClose } from "react-icons/ai";
 import { CloseBtn, SubmitButton } from "../Components/Buttons";
 import { GetLang, UpdateData } from "../Components/Functions";
 import { PrimaryColor } from "../Components/Variables";
@@ -7,24 +6,20 @@ import { PrimaryColor } from "../Components/Variables";
 export const UpdateCour = ({detailsCour, setUpdateCour}) => {
     let lang = GetLang()?.data.courses
 
-    const [image, setImage] = useState(detailsCour?.image)
+    const [image, setImage] = useState(null)
     const [libelle, setlibelle] = useState(detailsCour?.libelle)
     const [desc, setdesc] = useState(detailsCour?.desc)
     const [dateL, setdateL] = useState(detailsCour?.dateDebut)
     const [dateF, setdateF] = useState(detailsCour?.dateFin)
 
-    let cour = {
-        image, libelle, desc, dateDebut: dateL, dateFin: dateF
-    }
+    let cour = {image, libelle, desc, dateDebut: dateL, dateFin: dateF}
 
     return(
         <div className="fixed z-20 top-0 left-0 h-screen bg-opacity-40 w-full flex justify-end">
             <div className=" rounded-md bg-white shadow-2xl w-full md:1/2 lg:w-2/6 mx-10 md:mx-20 lg:mx-0 flex flex-col pb-6">
                 <div className="flex-1">
                     <div className=" relative text-center py-4 font-medium text-xl border-b-2 border-gray-500">
-                        <h2>
-                            {lang?.update} 
-                        </h2>
+                        <h2> {lang?.update} </h2>
                         <CloseBtn close={setUpdateCour} />
                     </div>
 
@@ -52,11 +47,11 @@ export const UpdateCour = ({detailsCour, setUpdateCour}) => {
                         </div>
                         <div className="mb-6 flex flex-col">
                             <label className="mb-1"> {lang?.startDate} </label>
-                            <input value={dateL} onChange={(e)=> setdateF(e.target.value)} type="date" className="border-2 rounded-md border-gray-300 outline-none px-3 py-1" />
+                            <input value={dateL} onChange={(e)=> setdateL(e.target.value)} type="date" className="border-2 rounded-md border-gray-300 outline-none px-3 py-1" />
                         </div>
                         <div className="mb-6 flex flex-col">
                             <label className="mb-1"> {lang?.endDate} </label>
-                            <input value={dateF} onChange={(e)=> setdateL(e.target.value)} type="date" className="border-2 rounded-md border-gray-300 outline-none px-3 py-1" />
+                            <input value={dateF} onChange={(e)=> setdateF(e.target.value)} type="date" className="border-2 rounded-md border-gray-300 outline-none px-3 py-1" />
                         </div>
 
                     </div>
@@ -78,18 +73,14 @@ export const UpdateProf = ({detailsProf, setUpdateProf}) => {
     const [lname, setLname] = useState(detailsProf?.nom)
     const [pass, setPass] = useState(null)
 
-    let teacher = {
-        email, nom: lname, prenom: fname, password: pass
-    }
+    let teacher = {email, nom: lname, prenom: fname, password: pass}
 
     return(
         <div className="fixed z-20 top-0 bg-gray-800 left-0 h-screen bg-opacity-40 w-full flex justify-end">
             <div className=" rounded-md bg-white shadow-2xl w-full md:1/2 lg:w-2/6 mx-10 md:mx-20 lg:mx-0 flex flex-col pb-6">
                 <div className="flex-1">
                     <div className=" relative text-center py-4 font-medium text-xl border-b-2 border-gray-500">
-                        <h2>
-                            {lang.update}
-                        </h2>
+                        <h2>{lang.update}</h2>
                         <CloseBtn close={setUpdateProf} />
                     </div>
 
