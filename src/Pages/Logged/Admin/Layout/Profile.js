@@ -1,12 +1,15 @@
 import React from 'react'
-import { GetLang, LogOut, getUserData, setLang } from '../../../../Components/Functions'
+import { GetLang, LogOut, PageTitle, getUserData, setLang } from '../../../../Components/Functions'
 import ProfileHeader from '../../ProfileHeader'
 import Langs from '../../../../Components/Langs.json'
 import { SubmitButton } from '../../../../Components/Buttons'
+import { PrimaryColor } from '../../../../Components/Variables'
 
-function Profile() {
+function Profile({pageTitle}) {
+    PageTitle(pageTitle)
   let lang = GetLang()?.data
   let user = getUserData() 
+
 
   return (
     <div className='w-full py-10 px-6 md:px-20'>
@@ -28,7 +31,7 @@ function Profile() {
                 </div>
 
                 <div className='px-10 mt-6'>
-                    <SubmitButton text={lang?.buttons.logout} bgColor={"#FF0303"} color={"white"} fun={LogOut} />
+                    <SubmitButton text={lang?.buttons.logout} bgColor={PrimaryColor} color={"white"} fun={LogOut} />
                 </div>
             </div>
 

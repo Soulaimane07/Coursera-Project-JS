@@ -1,31 +1,25 @@
 import React from 'react'
 
-import {RxDashboard} from 'react-icons/rx'
-import {BsBook} from 'react-icons/bs'
-import {BiUser} from 'react-icons/bi'
-
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import Navbar from '../Navbar'
 import Home from './Layout/Home'
 import Something from '../Something'
+import { GetLang } from '../../../Components/Functions'
+import Courses from './Courses'
+import Profile from '../Admin/Layout/Profile'
 
 function Prof() {
+  let lang = GetLang()?.data.dashboard
+
   const pages = [
     {
-        "icon": <BsBook />,
-        "title":"Courses",
+        "title": lang?.cours,
         "link":"/courses"
     },
     {
-      "icon": <BsBook />,
-      "title":"Groupes",
+      "title": lang?.groups,
       "link":"/groupes"
-    },
-    {
-        "icon": <BsBook />,
-        "title":"Something",
-        "link":"/something"
-    },
+    }
   ]
   
   return (
@@ -34,6 +28,9 @@ function Prof() {
         <Navbar pages={pages} />
         <Routes>
           <Route path='/' element={<Home />} />
+          <Route path='/courses' element={<Courses />} />
+          <Route path='/profile' element={<Profile pageTitle={'Professeur - Profile'} />} />
+
           <Route path='/*' element={<Something />} />
         </Routes>
       </div>

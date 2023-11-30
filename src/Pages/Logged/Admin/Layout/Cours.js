@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import Header from '../../Header'
-import { GetData, GetLang } from '../../../../Components/Functions'
+import { GetData, GetLang, PageTitle } from '../../../../Components/Functions'
 import { CreateCours } from '../../../../Layout/Create'
 import { AdminCour } from '../../../../Layout/Cours'
 import { DetailCour } from '../../../../Layout/Details'
@@ -8,6 +8,8 @@ import { UpdateCour } from '../../../../Layout/Update'
 
 function Cours() {
     let cours = GetData("/cours/index", true)
+    PageTitle('Admin - Cours')
+
 
     const [createBtn, setCreateBtn] = useState(false)
     const [detailsCour, setDetailsCour] = useState(null)

@@ -23,6 +23,12 @@ export const setLang = (lang) => {
     window.location.reload()
 }
 
+export const PageTitle = (title) => {
+    useEffect(() => {
+        document.title = title;
+    }, []);
+}
+
 // ----------------- Authentification
 
 export const LoginFun = (data, spinner, navigate, message) => {

@@ -1,10 +1,12 @@
 import React from 'react'
 import Header from '../../Header'
-import { GetData, GetLang } from '../../../../Components/Functions'
+import { GetData, GetLang, PageTitle } from '../../../../Components/Functions'
 import { Card } from '../../../../Layout/Cards'
 
 function Home() {
   let lang = GetLang()?.data.dashboard
+
+  PageTitle('Admin - Dashboard')
 
   const cards =[
     {

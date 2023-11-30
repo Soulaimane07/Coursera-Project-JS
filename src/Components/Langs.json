@@ -16,12 +16,29 @@
                 "cours": "Courses",
                 "createCour": "Create a course",
                 "startDate":"Start date",
-                "endDate":"End date"
+                "endDate":"End date",
+                "createcour": "Create Course",
+                "image1":"Click to upload",
+                "title":"Title",
+                "desc":"Description",
+                "create":"Create",
+                "update":"Update",
+                "delete":"Delete",
+                "affected":"Affected Courses",
+                "affecter":"Affect "
             },
             "teachers":{
                 "teachers":"Teachers",
-                "createteacher": "Create a teacher"
-
+                "createteacher": "Create a teacher",
+                "email":"Email Address",
+                "fname":"First Name",
+                "lname":"Last Name",
+                "pass":"Password",
+                "action":"Actions",
+                "teacher":"Teacher",
+                "affected":"Affected courses",
+                "affecter":"Assign course",
+                "cours": "Courses"
             },
             "form":{
                 "email":"Email Address",
@@ -52,12 +69,27 @@
                 "cours": "Cours",
                 "createCour": "Créer un cours",
                 "startDate":"Date de début",
-                "endDate":"Date de fin"
+                "endDate":"Date de fin",
+                "createcour": "Créer un cours",
+                "image1":"Cliquez pour télécharger",
+                "title":"Titre",
+                "desc":"Description",
+                "create":"Créer",
+                "update":"Mise à jour",
+                "delete":"Supprimer"
             },
             "teachers":{
                 "teachers":"Professeurs",
-                "createteacher": "Créer un professeur"
-
+                "createteacher": "Créer un professeur",
+                "email":"Adresse e-mail",
+                "fname":"Prénom",
+                "lname":"Nom de famille",
+                "pass":"Mot de passe",
+                "action":"Actions",
+                "teacher":"Professeur",
+                "affected":"Les cours affectés",
+                "affecter":"Affecter un cour",
+                "cours": "Cours"
             },
             "form":{
                 "email":"Adresse e-mail",
@@ -88,12 +120,30 @@
                 "cours": "الدورات",
                 "createCour": "إنشاء دورة",
                 "startDate":"تاريخ البدء",
-                "endDate":"تاريخ الانتهاء"
+                "endDate":"تاريخ الانتهاء",
+                "createcour": "إنشاء دورة",
+                "image1":"انقر للتحميل",
+                "title":"العنوان",
+                "desc":"الوصف",
+                "create":"إنشاء",
+                "update":"تحديث",
+                "delete":"حذف"
             },
             "teachers":{
-                "teachers":"المدرسون",
-                "createteacher": "إنشاء مدرس"
-
+                "teachers":"الاساتذة",
+                "createteacher": "إنشاء مدرس",
+                "action":"إجراءات",
+                "email":"عنوان البريد الإلكتروني",
+                "fname":"الاسم الأول",
+                "lname":"اسم العائلة",
+                "pass":"كلمة المرور",
+                "create":"إنشاء",
+                "update":"تحديث",
+                "delete":"حذف",
+                "teacher":"مدرس",
+                "affected":"الدورات المعنات",
+                "affecter":"تعيين دورة",
+                "cours": "الدورات"
             },
             "form":{
                 "email":"عنوان البريد الإلكتروني",

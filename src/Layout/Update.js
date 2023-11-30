@@ -1,9 +1,12 @@
 import { useState } from "react";
 import { AiOutlineClose } from "react-icons/ai";
-import { SubmitButton } from "../Components/Buttons";
-import { UpdateData } from "../Components/Functions";
+import { CloseBtn, SubmitButton } from "../Components/Buttons";
+import { GetLang, UpdateData } from "../Components/Functions";
+import { PrimaryColor } from "../Components/Variables";
 
 export const UpdateCour = ({detailsCour, setUpdateCour}) => {
+    let lang = GetLang()?.data.courses
+
     const [image, setImage] = useState(detailsCour?.image)
     const [libelle, setlibelle] = useState(detailsCour?.libelle)
     const [desc, setdesc] = useState(detailsCour?.desc)
@@ -20,11 +23,9 @@ export const UpdateCour = ({detailsCour, setUpdateCour}) => {
                 <div className="flex-1">
                     <div className=" relative text-center py-4 font-medium text-xl border-b-2 border-gray-500">
                         <h2>
-                            Update {detailsCour?.libelle} 
+                            {lang?.update} 
                         </h2>
-                        <button className=" absolute top-3 left-4 rounded-md px-3 py-2 hover:bg-gray-700 hover:text-white transition-all" onClick={()=> setUpdateCour(false)}>
-                        <AiOutlineClose />
-                        </button>
+                        <CloseBtn close={setUpdateCour} />
                     </div>
 
                     <div className="px-10 pb-2">
@@ -34,7 +35,7 @@ export const UpdateCour = ({detailsCour, setUpdateCour}) => {
                                     <svg className="w-8 h-8 mb-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 16">
                                         <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2"/>
                                     </svg>
-                                    <p className="mb-2 text-sm text-gray-500 dark:text-gray-400"><span className="font-semibold">Click to upload</span></p>
+                                    <p className="mb-2 text-sm text-gray-500 dark:text-gray-400"><span className="font-semibold"> {lang?.image1} </span></p>
                                     <p className="text-xs text-gray-500 dark:text-gray-400">SVG, PNG, JPG </p>
                                 </div>
                                 <input onChange={(e)=> setImage(e.target.files[0])} id="dropzone-file" type="file" className="hidden" />
@@ -42,19 +43,19 @@ export const UpdateCour = ({detailsCour, setUpdateCour}) => {
                         </div> 
 
                         <div className="mb-6 flex flex-col">
-                            <label className="mb-1"> Libelle </label>
+                            <label className="mb-1"> {lang?.title} </label>
                             <input value={libelle} onChange={(e)=> setlibelle(e.target.value)} type="text" className="border-2 rounded-md border-gray-300 outline-none px-3 py-1" />
                         </div>
                         <div className="mb-6 flex flex-col">
-                            <label className="mb-1"> Description </label>
+                            <label className="mb-1"> {lang?.desc} </label>
                             <textarea value={desc} onChange={(e)=> setdesc(e.target.value)} rows="3" className="border-2 rounded-md border-gray-300 outline-none px-3 py-1" placeholder="Write your thoughts here..."></textarea>
                         </div>
                         <div className="mb-6 flex flex-col">
-                            <label className="mb-1"> Date debut </label>
+                            <label className="mb-1"> {lang?.startDate} </label>
                             <input value={dateL} onChange={(e)=> setdateF(e.target.value)} type="date" className="border-2 rounded-md border-gray-300 outline-none px-3 py-1" />
                         </div>
                         <div className="mb-6 flex flex-col">
-                            <label className="mb-1"> Date Fin </label>
+                            <label className="mb-1"> {lang?.endDate} </label>
                             <input value={dateF} onChange={(e)=> setdateL(e.target.value)} type="date" className="border-2 rounded-md border-gray-300 outline-none px-3 py-1" />
                         </div>
 
@@ -62,7 +63,7 @@ export const UpdateCour = ({detailsCour, setUpdateCour}) => {
                 </div>
                 
                 <div className="flex space-x-4 px-10">
-                    <SubmitButton link={`/cours/update/${detailsCour?.id}`} data={cour} fun={UpdateData} text={"Update"} bgColor={"green"} color={"white"} condition={libelle == "" || desc == "" || dateF == "" || dateL == ""} />
+                    <SubmitButton link={`/cours/update/${detailsCour?.id}`} data={cour} fun={UpdateData} text={lang?.update} bgColor={PrimaryColor} color={"white"} condition={libelle == "" || desc == "" || dateF == "" || dateL == ""} />
                 </div> 
             </div>
         </div>
@@ -70,6 +71,8 @@ export const UpdateCour = ({detailsCour, setUpdateCour}) => {
 } 
 
 export const UpdateProf = ({detailsProf, setUpdateProf}) => {
+    let lang = GetLang()?.data.teachers
+
     const [email, setEmail] = useState(detailsProf?.email)
     const [fname, setFname] = useState(detailsProf?.prenom)
     const [lname, setLname] = useState(detailsProf?.nom)
@@ -85,35 +88,33 @@ export const UpdateProf = ({detailsProf, setUpdateProf}) => {
                 <div className="flex-1">
                     <div className=" relative text-center py-4 font-medium text-xl border-b-2 border-gray-500">
                         <h2>
-                            Update Professeur
+                            {lang.update}
                         </h2>
-                        <button className=" absolute top-3 left-4 rounded-md px-3 py-2 hover:bg-gray-700 hover:text-white transition-all" onClick={()=> setUpdateProf(false)}>
-                            <AiOutlineClose />
-                        </button>
+                        <CloseBtn close={setUpdateProf} />
                     </div>
 
                     <div className="px-10 pb-2 mt-6">
                         <div className="mb-6 flex flex-col">
-                            <label className="mb-1"> Email Address </label>
+                            <label className="mb-1"> {lang?.email} </label>
                             <input value={email} onChange={(e)=> setEmail(e.target.value)} type="email" className="border-2 rounded-md border-gray-300 outline-none px-3 py-1" />
                         </div>
                         <div className="mb-6 flex flex-col">
-                            <label className="mb-1"> First name </label>
+                            <label className="mb-1"> {lang?.fname} </label>
                             <input value={fname} onChange={(e)=> setFname(e.target.value)} type="text" className="border-2 rounded-md border-gray-300 outline-none px-3 py-1" />
                         </div>
                         <div className="mb-6 flex flex-col">
-                            <label className="mb-1"> Last name </label>
+                            <label className="mb-1"> {lang?.lname} </label>
                             <input value={lname} onChange={(e)=> setLname(e.target.value)} type="text" className="border-2 rounded-md border-gray-300 outline-none px-3 py-1" />
                         </div>
                         <div className="mb-6 flex flex-col">
-                            <label className="mb-1"> Password </label>
+                            <label className="mb-1"> {lang?.pass} </label>
                             <input onChange={(e)=> setPass(e.target.value)} type="password" className="border-2 rounded-md border-gray-300 outline-none px-3 py-1" />
                         </div>
                     </div>
                 </div>
                 
                 <div className="flex space-x-4 px-10">
-                    <SubmitButton link={`/prof/update/${detailsProf?.id}`} data={teacher} fun={UpdateData} text={"Update"} bgColor={"green"} color={"white"} condition={email == "" || fname == "" || lname == "" || pass == ""} />
+                    <SubmitButton link={`/prof/update/${detailsProf?.id}`} data={teacher} fun={UpdateData} text={lang?.update} bgColor={PrimaryColor} color={"white"} condition={email == "" || fname == "" || lname == "" || pass == ""} />
                 </div> 
             </div>
         </div>
