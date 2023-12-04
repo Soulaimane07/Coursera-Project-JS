@@ -4,7 +4,6 @@ import { useEffect, useState } from "react"
 import Langs from "./Langs.json"
 
 
-
 export const GetLang = () => {
     let langSub = JSON.parse(localStorage.getItem("CourseraLang"))
     
@@ -158,6 +157,23 @@ export const UpdateData = (data, spinner, navigate, be, link) => {
             spinner(false)
             console.log(res.data);
             window.location.reload()
+        })
+        .catch(err => {
+            console.log(err);
+            spinner(false)
+        })
+}
+
+export const SubmitCertificate = (data, spinner, navigate, be, link) => {
+    spinner(true)
+    // console.log(data);
+
+    axios.post(`${serverURL}/pdf`, data, {headers: {"Content-Type": "multipart/form-data"}})
+        .then(res => {
+            console.log(res.data);
+            let pdf = res.data
+            console.log(pdf.toLowerCase().includes("nov 8"))
+            spinner(false)
         })
         .catch(err => {
             console.log(err);

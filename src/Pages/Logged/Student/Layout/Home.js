@@ -1,6 +1,6 @@
 import React from 'react'
 import Header from '../../Header'
-import { GetLang, PageTitle } from '../../../../Components/Functions'
+import { GetData, GetLang, PageTitle } from '../../../../Components/Functions'
 import { Card } from '../../../../Layout/Cards'
 
 function Home() {
@@ -12,7 +12,7 @@ function Home() {
     {
       "logo": "./assets/images/cours.png", 
       "title": lang?.cours,
-      "total": 0,
+      "total": GetData("/cours/index")?.length,
       "link":"/courses"
     }
   ]
@@ -22,8 +22,8 @@ function Home() {
       <Header title={lang?.dashboard} />
 
       <div className='flex flex-wrap mt-4 justify-center'>
-        {cards.map((item,key)=>{
-          return <Card key={key} title={item.title} logo={item.logo} total={item.total} link={item.link}   />
+        {cards?.map((item,key)=>{
+          return <Card key={key} title={item?.title} logo={item?.logo} total={item?.total} link={item?.link}   />
         })}
       </div>
 

@@ -18,7 +18,9 @@ function Navbar({pages}) {
 
 
   return (
-      <nav style={{backgroundColor: PrimaryColor}} className="fixed z-10 top-0 left-0 w-full">
+      <nav 
+      // style={{backgroundColor: PrimaryColor}} 
+      className="fixed z-10 top-0 left-0 w-full bg-red-600 dark:bg-blue-600">
          <div className="mx-auto px-6 md:px-20 py-5">
             <div className="flex items-center justify-between">
                <div className="flex items-center">
@@ -115,7 +117,7 @@ function Navbar({pages}) {
                   </div>
                </Link>
                <div className="space-y-1 px-4 mt-4">
-                  <SubmitButton text="Log out" bgColor={"#4895ef"} color={"white"} fun={LogOut} />
+                  <SubmitButton text={lang.logout} bgColor={"#4895ef"} color={"white"} fun={LogOut} />
                </div>
             </div>
          </div>

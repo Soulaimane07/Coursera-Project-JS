@@ -1,9 +1,32 @@
 import { PrimaryColor, uploadsURL } from "../Components/Variables";
 import { CloseBtn, SubmitButton } from "../Components/Buttons";
-import { DeleteData, GetLang } from "../Components/Functions";
+import { DeleteData, GetLang, getUserData } from "../Components/Functions";
 
-export const DetailCour = ({detailsCour, setDetailsCour, setUpdateCour}) => {
+export const DetailCour = ({detailsCour, setDetailsCour, setUpdateCour, setSubmitCour}) => {
     let lang = GetLang()?.data.courses
+    let userRole = getUserData()?.role
+
+    const Buttons = () => {
+        let result
+
+        if(userRole == "etudiant"){
+            result = (<SubmitButton text={"Submit"} fun={()=> setSubmitCour(detailsCour)} link={null} bgColor={PrimaryColor} color={"white"} />)
+        }
+        if(userRole == "responsable"){
+            result = (
+                <>
+                    <SubmitButton text={lang?.delete} fun={DeleteData} link={`/cours/destroy/${detailsCour?.id}`} bgColor={PrimaryColor} color={"white"} />
+                    <SubmitButton text={lang?.update} fun={()=> setUpdateCour(detailsCour)} bgColor={PrimaryColor} color={"white"} />
+                </>
+            )
+        }
+        if(userRole == "professeur"){
+        }
+        
+        return result
+    }
+
+    console.log(userRole);
 
     return (
         <div className="fixed z-20 top-0 left-0 h-screen bg-gray-800 bg-opacity-40 w-full flex justify-end">
@@ -41,8 +64,7 @@ export const DetailCour = ({detailsCour, setDetailsCour, setUpdateCour}) => {
                     </div>
                 </div>
                 <div className="flex space-x-4 px-10">
-                    <SubmitButton text={lang?.delete} fun={DeleteData} link={`/cours/destroy/${detailsCour?.id}`} bgColor={PrimaryColor} color={"white"} />
-                    <SubmitButton text={lang?.update} fun={()=> setUpdateCour(detailsCour)} bgColor={PrimaryColor} color={"white"} />
+                    {Buttons()}
                 </div>
             </div>
         </div>

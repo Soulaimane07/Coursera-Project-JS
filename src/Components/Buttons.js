@@ -1,6 +1,9 @@
 import { useState } from "react"
 import { Link, useNavigate } from "react-router-dom"
+
 import { AiOutlineClose } from "react-icons/ai";
+import { FaArrowLeftLong } from "react-icons/fa6";
+
 
 export const Spinner = () => {
     return(
@@ -45,6 +48,17 @@ export const CloseBtn = ({close}) => {
     return(
         <button className=" absolute top-3 left-4 rounded-md px-3 py-2 hover:bg-blue-600 hover:text-white transition-all" onClick={()=> close(false)}>
             <AiOutlineClose />
+        </button>
+    )
+}
+
+export const BackBtn = ({back}) => {
+    return(
+        <button 
+            className=" absolute top-3 left-4 rounded-md px-3 py-2 hover:bg-blue-600 hover:text-white transition-all" 
+            onClick={()=> back(false)}
+        >
+            <FaArrowLeftLong />
         </button>
     )
 }
