@@ -1,11 +1,13 @@
 import React from 'react'
-import { GetLang, LogOut, PageTitle, getUserData, setLang } from '../../../../Components/Functions'
+import { GetLang, GetToTop, LogOut, PageTitle, getUserData, setLang } from '../../../../Components/Functions'
 import ProfileHeader from '../../ProfileHeader'
 import Langs from '../../../../Components/Langs.json'
 import { SubmitButton } from '../../../../Components/Buttons'
 import { PrimaryColor } from '../../../../Components/Variables'
 
 function Profile({pageTitle}) {
+  GetToTop()
+
     PageTitle(pageTitle)
   let lang = GetLang()?.data
   let user = getUserData() 

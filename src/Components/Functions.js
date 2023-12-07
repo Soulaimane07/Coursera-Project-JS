@@ -28,6 +28,30 @@ export const PageTitle = (title) => {
     }, []);
 }
 
+export const GetToTop = () => {
+    useEffect(()=>{
+      window.scroll(0,0)
+    }, [])
+}
+
+export const toggleFullScreen = () => {
+    if (!document.fullscreenElement) {
+        document.documentElement.requestFullscreen();
+    } else {
+        document.exitFullscreen();
+    }
+};
+
+export const ExitVideo = () => {
+    if (!document.fullscreenElement) {
+    } else {
+        document.exitFullscreen();
+    }
+}
+
+
+
+
 // ----------------- Authentification
 
 export const LoginFun = (data, spinner, navigate, message) => {
@@ -36,21 +60,20 @@ export const LoginFun = (data, spinner, navigate, message) => {
     
     axios.post(`${serverURL}/login`, data)
         .then(res => {
-            if(res.data){
+            if(res.data.status === "success"){
                 spinner(false)
                 console.log(res.data)
-                localStorage.setItem("CourseraUser", JSON.stringify(res.data))
+                localStorage.setItem("CourseraUser", JSON.stringify(res.data.user))
                 navigate("/")
                 window.location.reload()
             } else {
-                // message(err.response.data.message),
                 console.log(res);
                 spinner(false)
             }
         })
         .catch(err => {
             console.log(err);
-            message(err.response.data.message)
+            message("Email or password are wrong !")
             spinner(false)
         })
 }
@@ -168,8 +191,9 @@ export const SubmitCertificate = (data, spinner, navigate, be, link) => {
         .then(res => {
             console.log(res.data);
             let pdf = res.data
-            console.log(pdf.toLowerCase().includes("nov 8"))
+            // console.log()
             spinner(false)
+            be(res.data)
         })
         .catch(err => {
             console.log(err);

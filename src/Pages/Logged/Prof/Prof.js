@@ -5,7 +5,7 @@ import Navbar from '../Navbar'
 import Home from './Layout/Home'
 import Something from '../Something'
 import { GetLang } from '../../../Components/Functions'
-import Courses from './Courses'
+import Courses from './Layout/Courses'
 import Profile from '../Admin/Layout/Profile'
 
 function Prof() {

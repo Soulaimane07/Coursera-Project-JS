@@ -1,6 +1,6 @@
 import React from 'react'
-import Header from '../Header'
-import { GetLang } from '../../../Components/Functions'
+import Header from '../../Header'
+import { GetLang } from '../../../../Components/Functions'
 
 function Courses() {
     let lang = GetLang()?.data.courses

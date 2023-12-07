@@ -1,8 +1,10 @@
 import React, { useState } from 'react'
 import Header from '../../Header'
-import { GetLang, PageTitle } from '../../../../Components/Functions'
+import { GetLang, GetToTop, PageTitle } from '../../../../Components/Functions'
 
 function Group() {
+  GetToTop()
+  
     let lang = GetLang()?.data.groups
     let langSub = GetLang()?.subTitle
     

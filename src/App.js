@@ -19,6 +19,7 @@ function App() {
     }
   }, [])
 
+
   return (
     <div className="App text-gray-800">
       {logged ? <Logged /> : <Auth />}

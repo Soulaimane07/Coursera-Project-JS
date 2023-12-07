@@ -12,14 +12,14 @@ function Home() {
     {
       "logo": "./assets/images/cours.png", 
       "title": lang?.cours,
-      "total": GetData("/cours/index")?.length,
+      "total": GetData("/cours/index")?.cours?.length,
       "link":"/courses"
     }
   ]
 
   return (
     <div className='w-full py-10 px-20 '>
-      <Header title={lang?.dashboard} />
+      <Header title={lang?.dashboard} total={0} />
 
       <div className='flex flex-wrap mt-4 justify-center'>
         {cards?.map((item,key)=>{

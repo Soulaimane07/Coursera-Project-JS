@@ -1,16 +1,22 @@
 import { Link } from "react-router-dom"
-import { AssignCour, GetData, GetLang, SubmitCertificate, getUserData } from "../Components/Functions";
+import { AssignCour, DeleteData, GetData, GetLang, SubmitCertificate, getUserData } from "../Components/Functions";
 import { AdminCour } from "./Cours";
 import { BackBtn, SubmitButton } from "../Components/Buttons";
 import { PrimaryColor } from "../Components/Variables";
 import { useState } from "react";
+
+
+import { LuPenSquare } from "react-icons/lu";
+import { FaRegTrashAlt } from "react-icons/fa";
+import { CiSearch } from "react-icons/ci";
+import { CoursesSkeleton } from "../Pages/Logged/Admin/Layout/Skeletons";
 
 export const Card = ({title, logo, total, link}) => {
     return (
         <Link to={link} className="bg-blue-100 hover:shadow-lg transition-all w-1/2 flex-1 px-4 py-4 rounded-md flex mx-2 my-2 items-center">
             <img src={logo} className="w-12" />
             <div className="ml-4">
-                <h1 to={link} className="font-medium text-xl mr-4"> {total} {title} </h1>
+                <h1 to={link} className="font-medium text-xl mr-4"> {total !== 0 && total} {title} </h1>
             </div>
         </Link>
     )
@@ -19,8 +25,6 @@ export const Card = ({title, logo, total, link}) => {
 export const AffectCours = ({selectedProf, setSelectedProf, cours}) => {
     let lang = GetLang()?.data.teachers
     let courses = GetData('/cours/index')
-
-    console.log(cours);
 
     
     const [selectedCour, setSelectedCour] = useState(null)
@@ -39,9 +43,9 @@ export const AffectCours = ({selectedProf, setSelectedProf, cours}) => {
                     </div>
 
                     <div className="px-10 mt-6 h-full overflow-hidden">
-                        <h1 className="text-2xl font-medium"> {lang?.cours} ( {courses?.length} ) </h1>
+                        <h1 className="text-2xl font-medium"> {lang?.cours} ( {courses?.cours?.length} ) </h1>
                         <ul className="mt-6 overflow-y-scroll h-full overflow-hidden pb-14">
-                            {courses?.map((item,key)=>(
+                            {courses?.cours?.map((item,key)=>(
                                 <AdminCour cours={cours} item={item} key={key} setDetailsCour={setSelectedCour} affect={true} selectedCour={selectedCour} />
                             ))}
                         </ul>
@@ -59,6 +63,7 @@ export const AffectCours = ({selectedProf, setSelectedProf, cours}) => {
 export const SubmitCourBox = ({detailsCour, setDetailsCour}) => {
     let lang = GetLang()?.data.courses
     const [certifPdf, setSertifPdf] = useState("")
+    const [certifText, setSertifText] = useState("")
 
     let user = getUserData()
 
@@ -83,7 +88,7 @@ export const SubmitCourBox = ({detailsCour, setDetailsCour}) => {
                                 <p className="mb-2 text-sm text-gray-500 dark:text-gray-400"><span className="font-semibold"> {lang?.image1} </span></p>
                                 <p className="text-xs text-gray-500 dark:text-gray-400">SVG, PNG, JPG </p>
                             </div>
-                            <input onChange={(e)=> setSertifPdf(e.target.files[0])} id="dropzone-file" type="file" className="hidden" />
+                            <input accept=".pdf" onChange={(e)=> setSertifPdf(e.target.files[0])} id="dropzone-file" type="file" className="hidden" />
                         </label>
                     </div> 
                     <div className="mb-6 flex flex-col">
@@ -94,11 +99,103 @@ export const SubmitCourBox = ({detailsCour, setDetailsCour}) => {
                         <label className="mb-1"> Etudiant </label>
                         <input value={user?.email} disabled type="text" className="border-2 rounded-md border-gray-300 outline-none px-3 py-1" />
                     </div>
+                    <div className="mb-6 flex flex-col">
+                        <label className="mb-1"> Certificate </label>
+                        <p className="border-2 rounded-md border-gray-300 outline-none px-3 py-1"> 
+                            {certifText} 
+                        </p>
+                    </div>
                 </div>
                 <div className="flex space-x-4 px-10 pt-4">
-                    <SubmitButton text={"Submit"} data={{pdf: certifPdf}} fun={SubmitCertificate} link={`/prof/destroy/`} bgColor={PrimaryColor} color={"white"} condition={certifPdf == ""} />
+                    <SubmitButton message={setSertifText} text={"Submit"} data={{pdf: certifPdf}} fun={SubmitCertificate} link={`/prof/destroy/`} bgColor={PrimaryColor} color={"white"} condition={certifPdf == ""} />
                 </div> 
             </div>
         </div>
+    )
+}
+
+
+export const Layout = ({layout, setLayout}) => {
+    return (
+        <div className="bg-blue-100 rounded-md w-fit px-0.5 py-1 justify-end flex flex-row space-x-0.5">
+            <button onClick={()=> setLayout(0)} className={`rounded-md px-3 py-1  font-medium transition-all ${layout == 0 ? 'text-blue-600 bg-white shadow-md' : 'hover:bg-blue-100 hover:text-blue-600 text-gray-600 '}`}> 
+                Grid 
+            </button>
+            <button onClick={()=> setLayout(1)} className={`rounded-md px-3 py-1  font-medium transition-all ${layout == 1 ? 'text-blue-600 bg-white shadow-md' : 'hover:bg-blue-100 hover:text-blue-600 text-gray-600 '}`}> 
+                List 
+            </button>
+        </div>
+    )
+}
+
+export const SearchBox = ({placeholder}) => {
+    return (
+        <div className="bg-blue-100 border-blue-100 w-1/3 border-2 rounded-md flex items-center pr-2">
+            <input
+                className="bg-transparent w-full outline-none px-4 py-1 text-gray-600" 
+                placeholder={placeholder}
+                type="email"
+            />
+
+            <div className="text-gray-600">
+                <CiSearch size={20} />
+            </div>
+        </div>
+    )
+}
+
+
+
+
+export const GridCours = ({cours, setDetailsCour}) => {
+    return (
+        cours 
+            ?
+              cours?.cours?.map((item,key)=>(
+                <AdminCour item={item} key={key} affect={0}  setDetailsCour={setDetailsCour} />
+              ))
+            :
+              <CoursesSkeleton />
+          
+    )
+}
+
+export const GridTeachers = ({teachers, lang, setDetailsProf, setUpdateProf}) => {
+    let spinner = () => {}
+    
+    return (
+        teachers?.professeurs?.map((item,key)=>(
+            <div key={key} className="bg-blue-100 w-fit shadow-md px-10 py-6 rounded-md text-left">
+                <button onClick={()=> setDetailsProf(item)} className="mb-4 mx-auto w-full">
+                    <img src="/assets/images/user.png" className="w-20 mx-auto bg-white rounded-full p-4" />
+                </button>
+                <div className="flex flex-row justify-center mb-2">
+                    <label className="font-medium"> {item.email} </label>
+                </div>
+                <div className="flex mb-1 flex-row justify-between">
+                    <label className="text-gray-400"> {lang.lname} </label>
+                    <label className="font-medium pl-2"> {item.nom} </label>
+                </div>
+                <div className="flex mb-1 flex-row justify-between">
+                    <label className="text-gray-400"> {lang.fname} </label>
+                    <label className="font-medium pl-2"> {item.prenom} </label>
+                </div>
+                <div className="flex mb-1 flex-row justify-between">
+                    <label className="text-gray-400"> {lang.affected} </label>
+                    <label className="font-medium pl-2"> {item.cours?.length} </label>
+                </div>
+
+                <div className="flex flex-row justify-between space-x-2 mt-4">
+                    <button onClick={()=> setUpdateProf(item)} className='px-4 rounded-md opacity-70 hover:opacity-100 transition-all flex flex-row space-x-2 items-center hover:bg-blue-200 py-2'>
+                        <LuPenSquare size={18} />
+                        <span> Update </span>
+                    </button>
+                    <button onClick={()=> DeleteData(null, spinner, null, null, `/prof/destroy/${item?.id}`)} className='px-4 rounded-md opacity-70 hover:opacity-100 transition-all flex flex-row space-x-2 items-center hover:bg-blue-200 py-2'>
+                        <FaRegTrashAlt size={18} />
+                        <span> Delete </span>
+                    </button>
+                </div>
+            </div>
+        ))
     )
 }

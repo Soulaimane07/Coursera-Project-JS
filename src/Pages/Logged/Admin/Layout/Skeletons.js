@@ -28,7 +28,7 @@ export const TeachersSkeleton = () => {
 
     return (
         keys?.map((item,key)=>(
-            <tr key={key} className='bg-blue-100 animate-pulse border-b-2 border-blue-200 text-gray-700'>
+            <tr key={key} className=' animate-pulse border-b-1 border-blue-200 text-gray-700'>
                 <td className='px-6 py-4 font-medium whitespace-nowrap'>
                     <div className="h-2.5 bg-gray-300 rounded-full w-24"></div>
                 </td>
