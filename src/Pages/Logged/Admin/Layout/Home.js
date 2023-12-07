@@ -5,6 +5,7 @@ import { Card } from '../../../../Layout/Cards'
 
 function Home() {
   let lang = GetLang()?.data.dashboard
+  let langSub = GetLang()?.subTitle
 
   PageTitle('Admin - Dashboard')
 
@@ -31,7 +32,7 @@ function Home() {
 
   return (
     <div className='w-full py-10 px-6 md:px-20'>
-      <Header title={lang?.dashboard} />
+      <Header title={lang?.dashboard} langSub={langSub} />
 
       <div className='flex flex-wrap mt-4 justify-center'>
         {cards.map((item,key)=>{

@@ -56,6 +56,22 @@
             "buttons":{
                 "login":"Login",
                 "logout":"Sign out"
+            },
+            "login":{
+                "login":"Login",
+                "email":"Email Address",
+                "password":"Password",
+                "role":"What are you ?",
+                "student":"Student",
+                "responsable":"Responsible",
+                "professeur":"Teacher"
+            },
+            "footer":{
+                "pages":"Pages",
+                "languages":"Languages",
+                "profile":"Profile",
+                "copyright1":"Copyright",
+                "copyright2":"Coursera. All Rights Reserved."
             }
         }
     },
@@ -96,7 +112,10 @@
                 "teacher":"Professeur",
                 "affected":"Les cours affectés",
                 "affecter":"Affecter un cour",
-                "cours": "Cours"
+                "cours": "Cours",
+                "create":"Créer",
+                "update":"Mise à jour",
+                "delete":"Supprimer"
             },
             "groups":{
                 "groups":"Groupes",
@@ -112,6 +131,22 @@
             "buttons":{
                 "login":"Connexion",
                 "logout":"Déconnecter"
+            },
+            "login":{
+                "login":"Connexion",
+                "email":"Adresse e-mail",
+                "password":"Mot de passe",
+                "role":"vous étes quoi ?",
+                "student":"Etudiant",
+                "responsable":"Responsable",
+                "professeur":"Professeur"
+            },
+            "footer":{
+                "pages":"Pages",
+                "languages":"Langages",
+                "profile":"Profil",
+                "copyright1":"Droits d'auteur",
+                "copyright2":"Coursera. Tous droits réservés."
             }
         }
     },
@@ -171,6 +206,22 @@
             "buttons":{
                 "logout":"تسجيل الخروج",
                 "login":"تسجيل الدخول"
+            },
+            "login":{
+                "login":"تسجيل الدخول",
+                "email":"عنوان البريد الإلكتروني",
+                "password":"كلمة المرور",
+                "role":"ما أنت ؟",
+                "student":"طالب",
+                "responsable":"مسؤول",
+                "professeur":"مدرس"
+            },
+            "footer":{
+                "pages":"الصفحات",
+                "languages":"اللغات",
+                "profile":"الملف الشخصي",
+                "copyright1":"حقوق النشر",
+                "copyright2":"Coursera. كل الحقوق محفوظة."
             }
         }
     }

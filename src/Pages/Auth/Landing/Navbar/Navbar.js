@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { PrimaryColor, WebsiteLogo } from '../../../../Components/Variables';
+import { PrimaryColor, WebsiteLogoBlue } from '../../../../Components/Variables';
 import { LinkButton } from '../../../../Components/Buttons';
 
 function Navbar() {
@@ -18,7 +18,7 @@ function Navbar() {
   return (
     <div className={`${activeNavbar && 'fixed top-0 left-0 right-0 z-10 bg-white'} flex flex-row justify-between items-center py-4 px-4 md:px-12 lg:px-32`}>
         <div className='w-40'>
-            <img src={WebsiteLogo} className='w-full' />
+            <img src={WebsiteLogoBlue} className='w-full' />
         </div>
 
         <div className='buttons flex flex-row items-center space-x-4'>

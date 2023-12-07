@@ -1,39 +1,55 @@
 import React, { useState } from 'react'
-import { PrimaryColor, WebsiteLogo } from '../../../Components/Variables'
-import { Link } from 'react-router-dom'
+import { PrimaryColor, WebsiteLogoBlue } from '../../../Components/Variables'
 import { SubmitButton } from '../../../Components/Buttons'
-import { LoginFun } from '../../../Components/Functions'
+import { LoginFun, GetLang } from '../../../Components/Functions'
+import { FooterBox } from '../../../Components/LanguageBox'
 
 function Login() {
+    const [role, setRole] = useState("")
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
     const [message, setMessage] = useState(null)
 
+   let lang = GetLang()?.data.login
+   let langSub = GetLang()?.subTitle
+
+
   return (
-    <div className='flex md:flex-row h-screen w-full overflow-hidden'>
-        <div className='w-full lg:w-1/2 px-20 py-20'>
-            <Link to={"/"}>
-                <img src={WebsiteLogo} className='w-32' />
-            </Link>
-            <h1 className='my-10 text-center text-4xl mb-12'> Log in to your account </h1>
+    <div className={`flex  h-screen w-full overflow-hidden ${langSub === "ar" ? 'text-right flex-row-reverse' : 'text-left md:flex-row'}`}>
+        <div className='w-full md:px-32 lg:w-2/3 py-28 lg:px-14 relative'>
+            <div className='px-10'>
+                <img src={WebsiteLogoBlue} className='w-32' />
+                <h1 className=' text-blue-700 my-12 text-4xl mb-12 font-medium'> {lang.login} </h1>
 
-            {message && <div className='text-red-600 w-full text-center font-medium mb-6'> {message} </div>}
+                {message && <div className='text-red-600 w-full text-center font-medium mb-6'> {message} </div>}
 
-            <div className="relative z-0 w-full mb-6 group">
-                <label htmlFor="floating_email" className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Email address</label>
-                <input onChange={(e)=> setEmail(e.target.value)} type="email" name="floating_email" id="floating_email" className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none outline-none " placeholder=" " required />
+                <div className="w-full mb-6 flex flex-col">
+                    <label className=' font-semibold mb-2'> {lang.role} </label>
+                    <select onChange={(e)=> setRole(e.target.value)} className='border-2 w-full rounded-md border-gray-200 hover:border-gray-300 transition-all focus:border-blue-600 outline-none px-4 py-2'>
+                        <option></option>
+                        <option id="etudiant" className={langSub === "ar" ? 'text-right' : 'text-left'}> {lang.student} </option>
+                        <option id="professeur" className={langSub === "ar" ? 'text-right' : 'text-left'}> {lang.professeur} </option>
+                        <option id="responsable" className={langSub === "ar" ? 'text-right' : 'text-left'}> {lang.responsable} </option>
+                    </select>
+                </div>
+                
+                <div className="w-full mb-6 flex flex-col">
+                    <label className=' font-semibold mb-2'> {lang.email} </label>
+                    <input className='border-2 w-full rounded-md border-gray-200 hover:border-gray-300 transition-all focus:border-blue-600 outline-none px-4 py-2' onChange={(e)=> setEmail(e.target.value)} type="email" name="floating_email" id="floating_email"  required />
+                </div>
+                <div className="w-full mb-6 flex flex-col">
+                    <label className=' font-semibold mb-2'> {lang.password} </label>
+                    <input className='border-2 w-full rounded-md border-gray-200 hover:border-gray-300 transition-all focus:border-blue-600 outline-none px-4 py-2' onChange={(e)=> setPassword(e.target.value)} type="password" name="floating_password" id="floating_password"  required />
+                </div>
+
+                <SubmitButton fun={LoginFun} text={lang.login} bgColor={PrimaryColor} color={"white"} data={{email, password}} condition={email == "" || password == "" || role == ""} message={setMessage} />
+
+                <FooterBox />
             </div>
-            <div className="relative z-0 w-full mb-6 group">
-                <label htmlFor="floating_password" className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Password</label>
-                <input onChange={(e)=> setPassword(e.target.value)} type="password" name="floating_password" id="floating_password" className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none outline-none " placeholder=" " required />
-            </div>
-
-            <SubmitButton fun={LoginFun} text={"Login"} bgColor={PrimaryColor} color={"white"} data={{email, password}} condition={email == "" || password == ""} message={setMessage} />
-            <p className='mt-10'> Don't have an account? <Link style={{color: PrimaryColor}} to={"/signup"}> Sign Up </Link> </p>
         </div>
 
-        <div className='w-full hidden md:inline'>
-            <img src="./assets/images/login.jpeg" className='w-full h-full' />
+        <div className='w-full hidden lg:inline'>
+            <img src="./assets/images/login.jpg" className='w-full h-full' />
         </div>
     </div>
   )

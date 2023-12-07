@@ -10,6 +10,7 @@ function App() {
   
   useEffect(()=> {
     let user = getUserData() 
+    console.log(user);
     
     if(user !== null | undefined){
       setLogged(true)

@@ -148,11 +148,7 @@ export const DeleteData = (data, spinner, navigate, be, link) => {
 export const UpdateData = (data, spinner, navigate, be, link) => {
     spinner(true)
 
-    axios.put(`${serverURL}${link}`, data,{
-        // headers: {
-        //   "Content-Type": "multipart/form-data",
-        // },
-      })
+    axios.put(`${serverURL}${link}`, data)
         .then(res =>{
             spinner(false)
             console.log(res.data);
@@ -178,5 +174,20 @@ export const SubmitCertificate = (data, spinner, navigate, be, link) => {
         .catch(err => {
             console.log(err);
             spinner(false)
+        })
+}
+
+export const AssignCour = (data, spinner, navigate, be, link) => {
+    spinner(true)
+    
+    axios.post(`${serverURL}${link}`, data)
+        .then(res=> {
+            spinner(false)
+            console.log(res.data);
+            window.location.reload()
+        })
+        .catch(err => {
+            spinner(false)
+            console.log(err);
         })
 }

@@ -18,7 +18,7 @@ function Courses() {
 
       <div className='courses mt-10 flex flex-wrap justify-center'>
         {cours?.map((item,key)=>(
-          <AdminCour item={item} key={key}  setDetailsCour={setDetailsCour} />
+          <AdminCour item={item} key={key} affect={0}  setDetailsCour={setDetailsCour} />
         ))}
       </div>
 

@@ -34,7 +34,7 @@ export const SubmitButton = ({text, bgColor, color, border, data, fun, condition
             disabled={condition}
             onClick={()=> fun(data, setSpinner, navigate, message, link)} 
             style={{backgroundColor: bgColor, color: color}} 
-            className={`w-full py-3 rounded-md flex justify-center ${condition ? 'opacity-50' : 'opacity-100'} hover:opacity-80 transition-all`}
+            className={`w-full py-3 rounded-md flex justify-center ${condition ? 'opacity-50' : 'opacity-100 hover:opacity-80'}  transition-all outline-none`}
         >
             {spinner
                 ?   <Spinner />

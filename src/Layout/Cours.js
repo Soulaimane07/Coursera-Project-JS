@@ -1,18 +1,34 @@
 import { GetLang } from "../Components/Functions"
 import { uploadsURL } from "../Components/Variables"
 
-export const AdminCour = ({item, setDetailsCour, affect}) => {
+export const AdminCour = ({item, setDetailsCour, affect, selectedCour, cours}) => {
     let lang = GetLang()?.data.courses
     let result
-    
-    affect ?
+
+    affect == 1 &&(
         result = (
-            <button className=' bg-blue-100 text-left w-full rounded-md px-3 py-3 mb-4 hover:shadow-xl transition-all flex flex-row items-center space-x-4'>
+            <button onClick={()=> setDetailsCour(item?.id)} className={`${selectedCour === item.id ? "bg-blue-500 text-white" : "bg-blue-100"} text-left w-full rounded-md px-3 py-3 mb-4 hover:shadow-xl transition-all flex flex-row items-center space-x-4`}>
                 <img src={`${uploadsURL}/${item.image}`} className='w-1/3 rounded-md' />
                 <h1 className='text-xl font-medium mb-2'> {item.libelle} </h1>
             </button>
-    )
-    :   result = (
+    ))
+
+    affect == 2 &&(
+        result = (
+            <div className={`bg-blue-100 text-left mt-2 w-full rounded-md px-3 py-3 mb-4 hover:shadow-xl transition-all flex flex-row items-center space-x-4`}>
+                <div className="flex flex-row items-center space-x-2">
+                    <img src={`${uploadsURL}/${item.image}`} className='w-1/3 rounded-md' />
+                    <h1 className='text-xl font-medium mb-2'> {item.libelle} </h1>
+                </div>
+
+                <button className="hover:text-red-600 transition-all">
+                    Delete
+                </button>
+            </div>
+    ))
+
+    affect == 0 &&  ( 
+        result = (
         <button onClick={()=> setDetailsCour(item)} className='bg-blue-100 text-left w-full rounded-md px-6 py-5 mb-4 md:mx-2 hover:shadow-xl transition-all flex flex-col md:flex-row'>
             <img src={`${uploadsURL}/${item.image}`} className='w-full md:w-52 rounded-md mb-4 md:mb-0' />
             
@@ -25,7 +41,7 @@ export const AdminCour = ({item, setDetailsCour, affect}) => {
                 </div>
             </div>
         </button>
-    )
+    ))
 
 
     return result

@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom"
-import { GetData, GetLang, SubmitCertificate, getUserData } from "../Components/Functions";
+import { AssignCour, GetData, GetLang, SubmitCertificate, getUserData } from "../Components/Functions";
 import { AdminCour } from "./Cours";
 import { BackBtn, SubmitButton } from "../Components/Buttons";
 import { PrimaryColor } from "../Components/Variables";
@@ -16,9 +16,18 @@ export const Card = ({title, logo, total, link}) => {
     )
 }
 
-export const AffectCours = ({setAffectcours}) => {
+export const AffectCours = ({selectedProf, setSelectedProf, cours}) => {
     let lang = GetLang()?.data.teachers
     let courses = GetData('/cours/index')
+
+    console.log(cours);
+
+    
+    const [selectedCour, setSelectedCour] = useState(null)
+
+    let data = {
+        cours_ids: [selectedCour]
+    }
 
     return(
         <div className="fixed z-20 top-0 left-0 h-screen  bg-opacity-40 w-full flex justify-end">
@@ -26,20 +35,20 @@ export const AffectCours = ({setAffectcours}) => {
             <div className="flex flex-col justify-between pb-6 h-full">
                     <div className="relative text-center py-4 font-medium text-xl border-b-2 border-gray-500">
                         <h2> {lang?.affecter} </h2>
-                        <BackBtn back={setAffectcours} />
+                        <BackBtn back={setSelectedProf} />
                     </div>
 
                     <div className="px-10 mt-6 h-full overflow-hidden">
                         <h1 className="text-2xl font-medium"> {lang?.cours} ( {courses?.length} ) </h1>
                         <ul className="mt-6 overflow-y-scroll h-full overflow-hidden pb-14">
                             {courses?.map((item,key)=>(
-                                <AdminCour item={item} key={key} setDetailsCour={null} affect={true} />
+                                <AdminCour cours={cours} item={item} key={key} setDetailsCour={setSelectedCour} affect={true} selectedCour={selectedCour} />
                             ))}
                         </ul>
                     </div>
                     
                     <div className="flex space-x-4 px-10 pt-4">
-                        <SubmitButton text={lang?.affecter} fun={null} link={`/prof/destroy/`} bgColor={PrimaryColor} color={"white"} />
+                        <SubmitButton data={data} text={lang?.affecter} fun={AssignCour} link={`/prof/${selectedProf}/assignCours`} bgColor={PrimaryColor} color={"white"} condition={selectedCour === null}  />
                     </div> 
                 </div>
             </div>

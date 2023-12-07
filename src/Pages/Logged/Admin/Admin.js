@@ -9,6 +9,7 @@ import { GetLang } from '../../../Components/Functions'
 import Profile from './Layout/Profile'
 import Teachers from './Layout/Teachers'
 import Group from './Layout/Group'
+import Footer from '../Footer'
 
 function Admin() {
   let lang = GetLang()?.data.dashboard
@@ -30,9 +31,9 @@ function Admin() {
 
   return (
     <BrowserRouter>
-      <div className='h-screen mt-20'>
+      <div className='min-h-screen mt-20'>
         <Navbar pages={pages} />
-        <Routes>
+        <Routes >
           <Route path='/' element={<Home />} />
           <Route path='/courses' element={<Cours />} />
           <Route path='/teachers' element={<Teachers />} />
@@ -41,6 +42,8 @@ function Admin() {
           <Route path='/*' element={<Something />} />
         </Routes>
       </div>
+
+      <Footer pages={pages} />
     </BrowserRouter>
   )
 }
