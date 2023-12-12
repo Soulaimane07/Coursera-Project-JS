@@ -48,14 +48,14 @@ function Home() {
         })}
       </div>
 
-      <div className='mt-10 flex flex-col md:flex-row justify-center'>
+      {/* <div className='mt-10 flex flex-col md:flex-row justify-center'>
         <div className='w-full md:w-1/2 flex-1 px-4 py-4'>
           <CoursesBox lang={lang} courses={courses} langSub={langSub} />
         </div>
         <div className='w-full md:w-1/2 flex-1 px-4 py-4'>
           <TeachersBox lang={lang} teachers={profs} langSub={langSub} />
         </div>
-      </div>
+      </div> */}
     </div>
   )
 }

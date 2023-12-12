@@ -49,6 +49,15 @@ export const ExitVideo = () => {
     }
 }
 
+export const SearchFun = (data, item, searchTerm) => {
+    let result = []
+
+    item === 'libelle' &&( result = data?.filter((item)=> item.libelle?.toLowerCase()?.startsWith(searchTerm?.toLowerCase())))
+    item === 'email' &&( result = data?.filter((item)=> item.email?.toLowerCase()?.startsWith(searchTerm?.toLowerCase())))
+    
+    return result
+}
+
 
 
 
@@ -57,7 +66,7 @@ export const ExitVideo = () => {
 export const LoginFun = (data, spinner, navigate, message) => {
     spinner(true)
     message(false)
-    
+
     axios.post(`${serverURL}/login`, data)
         .then(res => {
             if(res.data.status === "success"){
@@ -124,12 +133,12 @@ export const GetData = (link, roal) => {
         axios.get(`${serverURL}${link}`)
             .then(res => {
                 setData(res.data)
-                // console.log(res.data);
+                console.log(res.data);
             })
             .catch(err => {
                 console.log(err);
             })
-    }, [])
+    }, [data])
 
     return data
 }
@@ -145,7 +154,7 @@ export const PostData = (data, spinner, navigate, be, link) => {
         .then(res => {
             spinner(false)
             console.log(res.data);
-            window.location.reload()
+            // window.location.reload()
         })
         .catch(err => {
             spinner(false)

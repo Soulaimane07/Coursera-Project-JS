@@ -2,6 +2,7 @@ import { PrimaryColor, uploadsURL } from "../Components/Variables";
 import { CloseBtn, SubmitButton } from "../Components/Buttons";
 import { DeleteData, GetLang, getUserData } from "../Components/Functions";
 import { AdminCour } from "./Cours";
+import { Alert } from "./Cards";
 
 export const DetailCour = ({detailsCour, setDetailsCour, setUpdateCour, setSubmitCour}) => {
     let lang = GetLang()?.data.courses
@@ -66,6 +67,8 @@ export const DetailCour = ({detailsCour, setDetailsCour, setUpdateCour, setSubmi
                     {Buttons()}
                 </div>
             </div>
+
+            <Alert />
         </div>
     )
 }
@@ -116,6 +119,7 @@ export const DetailProf = ({detailsProf, setDetailsProf, setSelectedProf}) => {
                     </div>
                 </div>
             </div>
+
         </div>
     )
 }

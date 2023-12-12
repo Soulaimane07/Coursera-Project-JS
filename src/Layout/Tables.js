@@ -31,7 +31,7 @@ export const TeachersTable = ({teachers, lang, setDetailsProf, setUpdateProf}) =
             </thead>
             <tbody>
                 {teachers 
-                    ?   teachers?.professeurs?.map((item,key)=>(
+                    ?   teachers?.map((item,key)=>(
                             <tr key={key} className='hover:bg-blue-100 transition-all border-b-1 border-blue-200 text-gray-700'>
                                 <button onClick={()=> setDetailsProf(item)} scope="row" className="px-6 py-4 font-medium whitespace-nowrap hover:text-blue-600">
                                     {item.email}
@@ -87,7 +87,7 @@ export const CoursesTable = ({cours, lang, setDetailsCour}) => {
             </thead>
             <tbody>
                 {cours 
-                    ?   cours?.cours?.map((item,key)=>(
+                    ?   cours?.map((item,key)=>(
                             <tr onClick={()=> setDetailsCour(item)} key={key} className=' cursor-pointer hover:bg-blue-100 transition-all border-b-1 border-blue-200 text-gray-700'>
                                 <td onClick={()=> setDetailsCour(item)}  scope="row" className="px-6 py-4 font-medium whitespace-nowrap hover:text-blue-600">
                                     {item.libelle}

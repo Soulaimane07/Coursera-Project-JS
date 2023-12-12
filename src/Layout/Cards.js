@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom"
-import { AssignCour, DeleteData, GetData, GetLang, SubmitCertificate, getUserData } from "../Components/Functions";
+import { AssignCour, DeleteData, GetData, GetLang, SearchFun, SubmitCertificate, getUserData } from "../Components/Functions";
 import { AdminCour } from "./Cours";
 import { BackBtn, SubmitButton } from "../Components/Buttons";
 import { PrimaryColor } from "../Components/Variables";
@@ -32,6 +32,9 @@ export const AffectCours = ({selectedProf, setSelectedProf, cours}) => {
     let data = {
         cours_ids: [selectedCour]
     }
+    const [searchTerm, setSearchTerm] = useState('')
+    console.log();
+
 
     return(
         <div className="fixed z-20 top-0 left-0 h-screen  bg-opacity-40 w-full flex justify-end">
@@ -43,9 +46,11 @@ export const AffectCours = ({selectedProf, setSelectedProf, cours}) => {
                     </div>
 
                     <div className="px-10 mt-6 h-full overflow-hidden">
-                        <h1 className="text-2xl font-medium"> {lang?.cours} ( {courses?.cours?.length} ) </h1>
+                        <h1 className="text-2xl font-medium mb-3"> {lang?.cours} ( {courses?.cours?.length} ) </h1>
+                        <SearchBox placeholder={"Search by email address"} setSearchTerm={setSearchTerm} width={1} />
+                        
                         <ul className="mt-6 overflow-y-scroll h-full overflow-hidden pb-14">
-                            {courses?.cours?.map((item,key)=>(
+                            {SearchFun(courses?.cours, 'libelle', searchTerm)?.map((item,key)=>(
                                 <AdminCour cours={cours} item={item} key={key} setDetailsCour={setSelectedCour} affect={true} selectedCour={selectedCour} />
                             ))}
                         </ul>
@@ -80,13 +85,13 @@ export const SubmitCourBox = ({detailsCour, setDetailsCour}) => {
                 </div>
                 <div className="px-10 mt-6 h-full overflow-hidden">
                     <div className="mt-6 mb-6 flex items-center justify-center w-full">
-                        <label htmlFor="dropzone-file" className="flex flex-col items-center justify-center w-full h-40 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-bray-800 hover:bg-gray-100">
+                        <label htmlFor="dropzone-file" className="flex flex-col items-center justify-center w-full h-40 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 -800 hover:bg-gray-100">
                             <div className="flex flex-col items-center justify-center pt-5 pb-6">
-                                <svg className="w-8 h-8 mb-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 16">
+                                <svg className="w-8 h-8 mb-4 text-gray-500 " aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 16">
                                     <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2"/>
                                 </svg>
-                                <p className="mb-2 text-sm text-gray-500 dark:text-gray-400"><span className="font-semibold"> {lang?.image1} </span></p>
-                                <p className="text-xs text-gray-500 dark:text-gray-400">SVG, PNG, JPG </p>
+                                <p className="mb-2 text-sm text-gray-500 "><span className="font-semibold"> {lang?.image1} </span></p>
+                                <p className="text-xs text-gray-500 ">SVG, PNG, JPG </p>
                             </div>
                             <input accept=".pdf" onChange={(e)=> setSertifPdf(e.target.files[0])} id="dropzone-file" type="file" className="hidden" />
                         </label>
@@ -128,13 +133,14 @@ export const Layout = ({layout, setLayout}) => {
     )
 }
 
-export const SearchBox = ({placeholder}) => {
+export const SearchBox = ({placeholder, setSearchTerm, width}) => {
     return (
-        <div className="bg-blue-100 border-blue-100 w-1/3 border-2 rounded-md flex items-center pr-2">
+        <div className={`${width ? 'w-full' : 'w-1/3'} bg-blue-100 border-blue-100  border-2 rounded-md flex items-center pr-2 `}>
             <input
                 className="bg-transparent w-full outline-none px-4 py-1 text-gray-600" 
                 placeholder={placeholder}
                 type="email"
+                onChange={(e)=> setSearchTerm(e.target.value)}
             />
 
             <div className="text-gray-600">
@@ -151,7 +157,7 @@ export const GridCours = ({cours, setDetailsCour}) => {
     return (
         cours 
             ?
-              cours?.cours?.map((item,key)=>(
+              cours?.map((item,key)=>(
                 <AdminCour item={item} key={key} affect={0}  setDetailsCour={setDetailsCour} />
               ))
             :
@@ -164,7 +170,7 @@ export const GridTeachers = ({teachers, lang, setDetailsProf, setUpdateProf}) =>
     let spinner = () => {}
     
     return (
-        teachers?.professeurs?.map((item,key)=>(
+        teachers?.map((item,key)=>(
             <div key={key} className="bg-blue-100 w-fit shadow-md px-10 py-6 rounded-md text-left">
                 <button onClick={()=> setDetailsProf(item)} className="mb-4 mx-auto w-full">
                     <img src="/assets/images/user.png" className="w-20 mx-auto bg-white rounded-full p-4" />
@@ -186,16 +192,46 @@ export const GridTeachers = ({teachers, lang, setDetailsProf, setUpdateProf}) =>
                 </div>
 
                 <div className="flex flex-row justify-between space-x-2 mt-4">
-                    <button onClick={()=> setUpdateProf(item)} className='px-4 rounded-md opacity-70 hover:opacity-100 transition-all flex flex-row space-x-2 items-center hover:bg-blue-200 py-2'>
+                    <button onClick={()=> setUpdateProf(item)} className='px-4 rounded-md opacity-70 hover:opacity-100 transition-all flex flex-row space-x-2 items-center hover:bg-blue-200 py-2 hover:text-green-600'>
                         <LuPenSquare size={18} />
                         <span> Update </span>
                     </button>
-                    <button onClick={()=> DeleteData(null, spinner, null, null, `/prof/destroy/${item?.id}`)} className='px-4 rounded-md opacity-70 hover:opacity-100 transition-all flex flex-row space-x-2 items-center hover:bg-blue-200 py-2'>
+                    <button onClick={()=> DeleteData(null, spinner, null, null, `/prof/destroy/${item?.id}`)} className='px-4 rounded-md opacity-70 hover:opacity-100 transition-all flex flex-row space-x-2 items-center hover:bg-blue-200 py-2 hover:text-red-600'>
                         <FaRegTrashAlt size={18} />
                         <span> Delete </span>
                     </button>
                 </div>
             </div>
         ))
+    )
+}
+
+
+export const Alert = ({close}) => {
+    return (
+        <div class="fixed top-0 left-0 bg-gray-600 bg-opacity-20 z-60 justify-center items-center flex w-full h-full">
+            <div class=" p-4 w-full max-w-md max-h-full">
+                <div class=" bg-white rounded-lg shadow">
+                    <button type="button" class="absolute top-3 end-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center">
+                        <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
+                        </svg>
+                        <span class="sr-only">Close modal</span>
+                    </button>
+                    <div class="p-4 md:p-5 text-center">
+                        <svg class="mx-auto mb-4 text-gray-400 w-12 h-12 " aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 11V6m0 8h.01M19 10a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/>
+                        </svg>
+                        <h3 class="mb-5 text-lg font-normal text-gray-500 ">Are you sure you want to delete this product?</h3>
+                        <button type="button" class="text-white bg-blue-600 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 d-800 font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center me-2">
+                            Yes, I'm sure
+                        </button>
+                        <button type="button" class="text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 ">
+                            No, cancel
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
     )
 }
