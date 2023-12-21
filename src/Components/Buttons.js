@@ -34,7 +34,7 @@ export const SubmitButton = ({text, bgColor, color, border, data, fun, condition
             disabled={condition}
             onClick={()=> fun(data, setSpinner, navigate, message, link)} 
             style={{backgroundColor: bgColor, color: color}} 
-            className={`w-full py-3 rounded-md flex justify-center ${condition ? 'opacity-50' : 'opacity-100 hover:opacity-80'}  transition-all outline-none`}
+            className={`w-full py-3 rounded-md flex justify-center ${condition ? 'opacity-50' : 'opacity-100 hover:opacity-80'} ${border && 'border-2'}  transition-all outline-none`}
         >
             {spinner
                 ?   <Spinner />
@@ -46,7 +46,10 @@ export const SubmitButton = ({text, bgColor, color, border, data, fun, condition
 
 export const CloseBtn = ({close}) => {
     return(
-        <button className=" absolute top-3 left-4 rounded-md px-3 py-2 hover:bg-blue-600 hover:text-white transition-all" onClick={()=> close(false)}>
+        <button 
+            className=" absolute top-3 left-4 rounded-md px-3 py-2 hover:bg-blue-600 hover:text-white transition-all" 
+            onClick={()=> close(false)}
+        >
             <AiOutlineClose />
         </button>
     )

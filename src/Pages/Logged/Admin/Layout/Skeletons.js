@@ -41,6 +41,9 @@ export const TeachersSkeleton = () => {
                 <td className="px-6 py-4">
                     <div className="w-32 h-2 bg-gray-300 rounded-full"></div>
                 </td>
+                <td className="px-6 py-4">
+                    <div className="w-32 h-2 bg-gray-300 rounded-full"></div>
+                </td>
                 <td>
                     <div className="h-2.5 bg-gray-300 rounded-full w-12"></div>
                 </td>

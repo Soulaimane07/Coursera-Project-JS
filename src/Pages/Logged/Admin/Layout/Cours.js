@@ -3,7 +3,7 @@ import Header from '../../Header'
 import { GetData, GetLang, GetToTop, PageTitle } from '../../../../Components/Functions'
 import { CreateCours } from '../../../../Layout/Create'
 import Nodata from '../../../../Components/Nodata'
-import CoursBody from './body/Body'
+import {CoursBody} from './body/Body'
 
 function Cours() {
     GetToTop()

@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { CloseBtn, SubmitButton } from "../Components/Buttons";
+import { BackBtn, CloseBtn, SubmitButton } from "../Components/Buttons";
 import { GetLang, UpdateData } from "../Components/Functions";
 import { PrimaryColor } from "../Components/Variables";
 
@@ -27,14 +27,14 @@ export const UpdateCour = ({detailsCour, setUpdateCour}) => {
                 <div className="flex-1">
                     <div className=" relative text-center py-4 font-medium text-xl border-b-2 border-gray-500">
                         <h2> {lang?.update} </h2>
-                        <CloseBtn close={setUpdateCour} />
+                        <BackBtn back={setUpdateCour} />
                     </div>
 
                     <div className="px-10 pb-2">
                         <div className="mt-6 mb-6 flex items-center justify-center w-full">
                             {logourl ?  
                                 <div className='logo'>
-                                    <img src={logourl} /> 
+                                    <img src={logourl} alt="" /> 
                                 </div>
                             :
                                 <label htmlFor="dropzone-file" className="flex flex-col items-center justify-center w-full h-40 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-bray-800 hover:bg-gray-100">
@@ -77,7 +77,7 @@ export const UpdateCour = ({detailsCour, setUpdateCour}) => {
                 </div>
                 
                 <div className="flex space-x-4 px-10">
-                    <SubmitButton link={`/cours/update/${detailsCour?.id}`} data={cour} fun={UpdateData} text={lang?.update} bgColor={PrimaryColor} color={"white"} condition={image == "" && libelle == detailsCour?.libelle && desc == detailsCour?.desc && dateF == detailsCour?.dateDebut && dateL == detailsCour?.dateFin} />
+                    <SubmitButton link={`/cours/update/${detailsCour?.id}`} data={cour} fun={UpdateData} text={lang?.update} bgColor={PrimaryColor} color={"white"} condition={image === "" && libelle === detailsCour?.libelle && desc === detailsCour?.desc && dateF === detailsCour?.dateDebut && dateL === detailsCour?.dateFin} />
                 </div> 
             </div>
         </div>
@@ -124,7 +124,39 @@ export const UpdateProf = ({detailsProf, setUpdateProf}) => {
                 </div>
                 
                 <div className="flex space-x-4 px-10">
-                    <SubmitButton link={`/prof/update/${detailsProf?.id}`} data={teacher} fun={UpdateData} text={lang?.update} bgColor={PrimaryColor} color={"white"} condition={email == "" || fname == "" || lname == "" || pass == ""} />
+                    <SubmitButton link={`/prof/update/${detailsProf?.id}`} data={teacher} fun={UpdateData} text={lang?.update} bgColor={PrimaryColor} color={"white"} condition={email === "" || fname === "" || lname === "" || pass === ""} />
+                </div> 
+            </div>
+        </div>
+    )
+}
+
+export const UpdateGroupe = ({data, setUpdate}) => {
+    let lang = GetLang()?.data.groups
+
+    const [nom, setNom] = useState(data?.nom)
+
+    let groupe = { nom }
+
+    return(
+        <div className="fixed z-20 top-0 left-0 h-screen bg-opacity-40 w-full flex justify-end">
+            <div className=" rounded-md bg-white shadow-2xl w-full md:1/2 lg:w-2/6 mx-10 md:mx-20 lg:mx-0 flex flex-col pb-6">
+                <div className="flex-1">
+                    <div className=" relative text-center py-4 font-medium text-xl border-b-2 border-gray-500">
+                        <h2>{lang.update}</h2>
+                        <BackBtn back={setUpdate} />
+                    </div>
+
+                    <div className="px-10 pb-2 mt-6">
+                        <div className="mb-6 flex flex-col">
+                            <label className="mb-1"> {lang?.name} </label>
+                            <input value={nom} onChange={(e)=> setNom(e.target.value)} type="gName" className="border-2 rounded-md border-gray-300 outline-none px-3 py-1" />
+                        </div>
+                    </div>
+                </div>
+                
+                <div className="flex space-x-4 px-10">
+                    <SubmitButton link={`/groupe/update/${data?.id}`} data={groupe} fun={UpdateData} text={lang?.update} bgColor={PrimaryColor} color={"white"} condition={nom === ""} />
                 </div> 
             </div>
         </div>

@@ -14,6 +14,7 @@ function Home() {
 
   let courses = GetData("/cours/index")?.cours
   let profs = GetData("/prof/showAll")?.professeurs
+  let groupes = GetData("/groupe/index")?.groupes
 
   const cards =[
     {
@@ -31,10 +32,11 @@ function Home() {
     {
       "logo": "./assets/images/student.png", 
       "title": lang?.groups,
-      "total": 0,
-      "link":"/groups"
+      "total": groupes?.length || 0,
+      "link":"/groupes"
     }
   ]
+
 
 
 
@@ -47,6 +49,7 @@ function Home() {
           return <Card key={key} title={item.title} logo={item.logo} total={item.total} link={item.link}   />
         })}
       </div>
+
 
       {/* <div className='mt-10 flex flex-col md:flex-row justify-center'>
         <div className='w-full md:w-1/2 flex-1 px-4 py-4'>

@@ -24,8 +24,11 @@
                 "create":"Create",
                 "update":"Update",
                 "delete":"Delete",
-                "affected":"Affected Courses",
-                "affecter":"Affect "
+                "affected":"Assigned Courses",
+                "affecter":"Assign",
+                "placeholder":"Search by course title",
+                "grid":"Grid",
+                "list":"List"
             },
             "teachers":{
                 "teachers":"Teachers",
@@ -36,16 +39,38 @@
                 "pass":"Password",
                 "action":"Actions",
                 "teacher":"Teacher",
-                "affected":"Affected courses",
+                "affected":"Assigned courses",
                 "affecter":"Assign course",
                 "cours": "Courses",
                 "update":"Update",
-                "create":"Create"
+                "create":"Create",
+                "affecterr":"Assign",
+                "affectedG": "Assigned groups",
+                "affecterG": "Assign groups",
+                "placeholder":"Search by email address",
+                "grid":"Grid",
+                "list":"List",
+                "groups":"Groups"            
             },
             "groups":{
                 "groups":"Groups",
-                "creategroup": "Create a Group"
-                
+                "creategroup": "Create a Group",
+                "name":"Name",
+                "email":"Email Address",
+                "fname":"First Name",
+                "lname":"Last Name",
+                "pass":"Password",
+                "create":"Create",
+                "update":"Update",
+                "delete":"Delete",
+                "affecter":"Affect",
+                "placeholder":"Search by group name",
+                "grid":"Grid",
+                "list":"List",
+                "students": "Students",
+                "createStudent": "Create student",
+                "birth":"Date of birth",
+                "phone":"Phone"
             },
             "form":{
                 "email":"Email Address",
@@ -72,6 +97,11 @@
                 "profile":"Profile",
                 "copyright1":"Copyright",
                 "copyright2":"Coursera. All Rights Reserved."
+            },
+            "alert":{
+                "text": "Are you sure?",
+                "yes":"Yes, I'm sure",
+                "no":"No, cancel"
             }
         }
     },
@@ -99,7 +129,11 @@
                 "desc":"Description",
                 "create":"Créer",
                 "update":"Mise à jour",
-                "delete":"Supprimer"
+                "delete":"Supprimer",
+                "placeholder":"Recherche par titre de cours",
+                "grid":"Grille",
+                "list":"Liste",
+                "affecter":"Affecter"
             },
             "teachers":{
                 "teachers":"Professeurs",
@@ -115,12 +149,33 @@
                 "cours": "Cours",
                 "create":"Créer",
                 "update":"Mise à jour",
-                "delete":"Supprimer"
+                "delete":"Supprimer",
+                "affectedG": "Groupes assignés",
+                "affecterG": "Affecter un groupe",
+                "placeholder":"Rechercher par adresse e-mail",
+                "grid":"Grille",
+                "list":"Liste",
+                "affecterr":"Affecter",
+                "groups":"Groupes"
             },
             "groups":{
                 "groups":"Groupes",
-                "creategroup": "Créer un groupe"
-                
+                "creategroup": "Créer un groupe",
+                "email":"Adresse e-mail",
+                "name":"Nom",
+                "fname":"Prénom",
+                "lname":"Nom de famille",
+                "pass":"Mot de passe",
+                "create":"Créer",
+                "update":"Mise à jour",
+                "delete":"Supprimer",
+                "placeholder":"Rechercher par nom de groupe",
+                "grid":"Grille",
+                "list":"Liste",
+                "students": "Étudiants",
+                "createStudent": "Créer un étudiant",
+                "birth":"Date naissance",
+                "phone":"Téléphone"
             },
             "form":{
                 "email":"Adresse e-mail",
@@ -147,6 +202,11 @@
                 "profile":"Profil",
                 "copyright1":"Droits d'auteur",
                 "copyright2":"Coursera. Tous droits réservés."
+            },
+            "alert":{
+                "text": "Es-tu sûr?",
+                "yes":"Oui, je suis sûr",
+                "no":"Non, annule"
             }
         }
     },
@@ -174,7 +234,11 @@
                 "desc":"الوصف",
                 "create":"إنشاء",
                 "update":"تحديث",
-                "delete":"حذف"
+                "delete":"حذف",
+                "placeholder":"البحث حسب عنوان الدورة",
+                "grid":"شبكة",
+                "list":"قائمة",
+                "affecter":"تعيين"
             },
             "teachers":{
                 "teachers":"الاساتذة",
@@ -190,12 +254,33 @@
                 "teacher":"مدرس",
                 "affected":"الدورات المعنات",
                 "affecter":"تعيين دورة",
-                "cours": "الدورات"
+                "cours": "الدورات",
+                "affecterG": "تعيين مجموعة",
+                "affectedG": "المجموعات المخصصة",
+                "placeholder":"البحث عن طريق عنوان البريد الإلكتروني",
+                "grid":"شبكة",
+                "list":"قائمة",
+                "affecterr":"تعيين",
+                "groups":"المجموعات"
             },
             "groups":{
                 "groups":"المجموعات",
-                "creategroup": "إنشاء مجموعة"
-                
+                "creategroup": "إنشاء مجموعة",
+                "email":"عنوان البريد الإلكتروني",
+                "name":"الاسم",
+                "fname":"الاسم الأول",
+                "lname":"اسم العائلة",
+                "pass":"كلمة المرور",
+                "create":"إنشاء",
+                "update":"تحديث",
+                "delete":"حذف",
+                "placeholder":"البحث حسب اسم المجموعة",
+                "grid":"شبكة",
+                "list":"قائمة",
+                "students": "طلاب",
+                "createStudent": "إنشاء طالب",
+                "birth":"تاريخ الولادة",
+                "phone":"الهاتف"
             },
             "form":{
                 "email":"عنوان البريد الإلكتروني",
@@ -222,6 +307,11 @@
                 "profile":"الملف الشخصي",
                 "copyright1":"حقوق النشر",
                 "copyright2":"Coursera. كل الحقوق محفوظة."
+            },
+            "alert":{
+                "text":"هل انت متاكد؟",
+                "yes":"نعم أنا متأكد",
+                "no":"لا، إلغاء"
             }
         }
     }

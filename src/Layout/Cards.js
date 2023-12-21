@@ -1,10 +1,9 @@
 import { Link } from "react-router-dom"
-import { AssignCour, DeleteData, GetData, GetLang, SearchFun, SubmitCertificate, getUserData } from "../Components/Functions";
+import { AssignCour, GetData, GetLang, SearchFun, SubmitCertificate, getUserData } from "../Components/Functions";
 import { AdminCour } from "./Cours";
 import { BackBtn, SubmitButton } from "../Components/Buttons";
 import { PrimaryColor } from "../Components/Variables";
 import { useState } from "react";
-
 
 import { LuPenSquare } from "react-icons/lu";
 import { FaRegTrashAlt } from "react-icons/fa";
@@ -14,7 +13,7 @@ import { CoursesSkeleton } from "../Pages/Logged/Admin/Layout/Skeletons";
 export const Card = ({title, logo, total, link}) => {
     return (
         <Link to={link} className="bg-blue-100 hover:shadow-lg transition-all w-1/2 flex-1 px-4 py-4 rounded-md flex mx-2 my-2 items-center">
-            <img src={logo} className="w-12" />
+            <img src={logo} className="w-12" alt="" />
             <div className="ml-4">
                 <h1 to={link} className="font-medium text-xl mr-4"> {total !== 0 && total} {title} </h1>
             </div>
@@ -22,42 +21,77 @@ export const Card = ({title, logo, total, link}) => {
     )
 }
 
-export const AffectCours = ({selectedProf, setSelectedProf, cours}) => {
-    let lang = GetLang()?.data.teachers
-    let courses = GetData('/cours/index')
+const AffectGroupes = ({selected, setSelected}) => {
+    let groupes = GetData("/groupe/index", true)?.groupes
+    const [searchTerm, setSearchTerm] = useState('')
 
-    
+    let langs = GetLang()?.data?.groups
+
+    return(
+        <div className="mt-4">
+            <SearchBox placeholder={langs?.placeholder} setSearchTerm={setSearchTerm} width={1} />
+            
+            <ul className="mt-6 overflow-y-scroll overflow-x-hidden h-full pb-14">
+                {SearchFun(groupes, 'name', searchTerm)?.map((item,key)=>(
+                    <GroupeCard data={item} key={key} type={1} select={setSelected} selected={selected}  />
+                ))}
+            </ul>
+        </div>
+    )
+}
+
+const AffectCour = ({selected, setSelected}) => {
+    let cours = GetData("/cours/index", true)
+
+    const [searchTerm, setSearchTerm] = useState('')
+
+    let langs = GetLang()?.data?.courses
+
+    return (
+        <div className="mt-4">
+            <SearchBox placeholder={langs?.placeholder} setSearchTerm={setSearchTerm} width={1} />
+            
+            <ul className="mt-6 overflow-y-scroll h-full">
+                {SearchFun(cours?.cours, 'libelle', searchTerm)?.map((item,key)=>(
+                    <AdminCour item={item} key={key} affect={1} selectedCour={selected} setDetailsCour={setSelected} />
+                ))}
+            </ul>
+        </div>
+    )
+}
+
+export const AffectToTeacher = ({lang, selectedProf, setSelectedProf}) => {
+    const [selectedGroup, setSelectedGroup] = useState(null)
     const [selectedCour, setSelectedCour] = useState(null)
 
-    let data = {
-        cours_ids: [selectedCour]
-    }
-    const [searchTerm, setSearchTerm] = useState('')
-    console.log();
-
+    const [type, setType] = useState(0)
 
     return(
         <div className="fixed z-20 top-0 left-0 h-screen  bg-opacity-40 w-full flex justify-end">
             <div className="rounded-md h-full bg-white shadow-2xl w-full md:1/2 lg:w-2/6 mx-10 md:mx-20 lg:mx-0">
             <div className="flex flex-col justify-between pb-6 h-full">
                     <div className="relative text-center py-4 font-medium text-xl border-b-2 border-gray-500">
-                        <h2> {lang?.affecter} </h2>
+                        <h2> {lang?.affecterr} </h2>
                         <BackBtn back={setSelectedProf} />
                     </div>
 
                     <div className="px-10 mt-6 h-full overflow-hidden">
-                        <h1 className="text-2xl font-medium mb-3"> {lang?.cours} ( {courses?.cours?.length} ) </h1>
-                        <SearchBox placeholder={"Search by email address"} setSearchTerm={setSearchTerm} width={1} />
-                        
-                        <ul className="mt-6 overflow-y-scroll h-full overflow-hidden pb-14">
-                            {SearchFun(courses?.cours, 'libelle', searchTerm)?.map((item,key)=>(
-                                <AdminCour cours={cours} item={item} key={key} setDetailsCour={setSelectedCour} affect={true} selectedCour={selectedCour} />
-                            ))}
-                        </ul>
+                        <div className="flex space-x-2">
+                            <button onClick={()=> setType(0)} className={`${type === 0 ? " bg-blue-500 text-white " : "bg-blue-100 hover:bg-blue-100 hover:text-blue-600 text-gray-600"} w-full rounded-md py-3`}>
+                                {lang?.groups}
+                            </button>
+                            <button onClick={()=> setType(1)} className={`${type === 1 ? " bg-blue-500 text-white " : "bg-blue-100 hover:bg-blue-100 hover:text-blue-600 text-gray-600"} w-full rounded-md py-3`}>
+                                {lang?.cours}
+                            </button>
+                        </div>
+
+                        {type === 0 && <AffectGroupes lang={lang} selected={selectedGroup} setSelected={setSelectedGroup} />}
+                        {type === 1 && <AffectCour lang={lang} selected={selectedCour} setSelected={setSelectedCour} />}
                     </div>
                     
                     <div className="flex space-x-4 px-10 pt-4">
-                        <SubmitButton data={data} text={lang?.affecter} fun={AssignCour} link={`/prof/${selectedProf}/assignCours`} bgColor={PrimaryColor} color={"white"} condition={selectedCour === null}  />
+                        {type === 0 && <SubmitButton data={{groupes_ids: [selectedGroup]}} text={lang?.affecterG} fun={AssignCour} link={`/prof/${selectedProf}/assignGroupes`} bgColor={PrimaryColor} color={"white"} condition={selectedGroup === null}  /> }
+                        {type === 1 && <SubmitButton data={{cours_ids: [selectedCour]}} text={lang?.affecter} fun={AssignCour} link={`/prof/${selectedProf}/assignCours`} bgColor={PrimaryColor} color={"white"} condition={selectedCour === null}  /> }
                     </div> 
                 </div>
             </div>
@@ -112,7 +146,7 @@ export const SubmitCourBox = ({detailsCour, setDetailsCour}) => {
                     </div>
                 </div>
                 <div className="flex space-x-4 px-10 pt-4">
-                    <SubmitButton message={setSertifText} text={"Submit"} data={{pdf: certifPdf}} fun={SubmitCertificate} link={`/prof/destroy/`} bgColor={PrimaryColor} color={"white"} condition={certifPdf == ""} />
+                    <SubmitButton message={setSertifText} text={"Submit"} data={{pdf: certifPdf}} fun={SubmitCertificate} link={`/prof/destroy/`} bgColor={PrimaryColor} color={"white"} condition={certifPdf === ""} />
                 </div> 
             </div>
         </div>
@@ -120,14 +154,14 @@ export const SubmitCourBox = ({detailsCour, setDetailsCour}) => {
 }
 
 
-export const Layout = ({layout, setLayout}) => {
+export const Layout = ({lang, layout, setLayout}) => {
     return (
         <div className="bg-blue-100 rounded-md w-fit px-0.5 py-1 justify-end flex flex-row space-x-0.5">
-            <button onClick={()=> setLayout(0)} className={`rounded-md px-3 py-1  font-medium transition-all ${layout == 0 ? 'text-blue-600 bg-white shadow-md' : 'hover:bg-blue-100 hover:text-blue-600 text-gray-600 '}`}> 
-                Grid 
+            <button onClick={()=> setLayout(0)} className={`rounded-md px-3 py-1  font-medium transition-all ${layout === 0 ? 'text-blue-600 bg-white shadow-md' : 'hover:bg-blue-100 hover:text-blue-600 text-gray-600 '}`}> 
+                {lang.grid} 
             </button>
-            <button onClick={()=> setLayout(1)} className={`rounded-md px-3 py-1  font-medium transition-all ${layout == 1 ? 'text-blue-600 bg-white shadow-md' : 'hover:bg-blue-100 hover:text-blue-600 text-gray-600 '}`}> 
-                List 
+            <button onClick={()=> setLayout(1)} className={`rounded-md px-3 py-1  font-medium transition-all ${layout === 1 ? 'text-blue-600 bg-white shadow-md' : 'hover:bg-blue-100 hover:text-blue-600 text-gray-600 '}`}> 
+                {lang.list} 
             </button>
         </div>
     )
@@ -166,14 +200,12 @@ export const GridCours = ({cours, setDetailsCour}) => {
     )
 }
 
-export const GridTeachers = ({teachers, lang, setDetailsProf, setUpdateProf}) => {
-    let spinner = () => {}
-    
+export const GridTeachers = ({teachers, lang, setDetailsProf, setUpdateProf, deleteBtn}) => {
     return (
         teachers?.map((item,key)=>(
             <div key={key} className="bg-blue-100 w-fit shadow-md px-10 py-6 rounded-md text-left">
                 <button onClick={()=> setDetailsProf(item)} className="mb-4 mx-auto w-full">
-                    <img src="/assets/images/user.png" className="w-20 mx-auto bg-white rounded-full p-4" />
+                    <img src="/assets/images/user.png" className="w-20 mx-auto bg-white rounded-full p-4" alt="" />
                 </button>
                 <div className="flex flex-row justify-center mb-2">
                     <label className="font-medium"> {item.email} </label>
@@ -187,6 +219,10 @@ export const GridTeachers = ({teachers, lang, setDetailsProf, setUpdateProf}) =>
                     <label className="font-medium pl-2"> {item.prenom} </label>
                 </div>
                 <div className="flex mb-1 flex-row justify-between">
+                    <label className="text-gray-400"> {lang?.affectedG} </label>
+                    <label className="font-medium pl-2"> {item.groupes?.length} </label>
+                </div>
+                <div className="flex mb-1 flex-row justify-between">
                     <label className="text-gray-400"> {lang.affected} </label>
                     <label className="font-medium pl-2"> {item.cours?.length} </label>
                 </div>
@@ -194,11 +230,11 @@ export const GridTeachers = ({teachers, lang, setDetailsProf, setUpdateProf}) =>
                 <div className="flex flex-row justify-between space-x-2 mt-4">
                     <button onClick={()=> setUpdateProf(item)} className='px-4 rounded-md opacity-70 hover:opacity-100 transition-all flex flex-row space-x-2 items-center hover:bg-blue-200 py-2 hover:text-green-600'>
                         <LuPenSquare size={18} />
-                        <span> Update </span>
+                        <span> {lang?.update} </span>
                     </button>
-                    <button onClick={()=> DeleteData(null, spinner, null, null, `/prof/destroy/${item?.id}`)} className='px-4 rounded-md opacity-70 hover:opacity-100 transition-all flex flex-row space-x-2 items-center hover:bg-blue-200 py-2 hover:text-red-600'>
+                    <button onClick={()=> deleteBtn(item?.id)} className='px-4 rounded-md opacity-70 hover:opacity-100 transition-all flex flex-row space-x-2 items-center hover:bg-blue-200 py-2 hover:text-red-600'>
                         <FaRegTrashAlt size={18} />
-                        <span> Delete </span>
+                        <span> {lang?.delete} </span>
                     </button>
                 </div>
             </div>
@@ -207,31 +243,103 @@ export const GridTeachers = ({teachers, lang, setDetailsProf, setUpdateProf}) =>
 }
 
 
-export const Alert = ({close}) => {
+export const Alert = ({yesFun, noFun, id, bg}) => {
+    let langs = GetLang()?.data?.alert
+
     return (
-        <div class="fixed top-0 left-0 bg-gray-600 bg-opacity-20 z-60 justify-center items-center flex w-full h-full">
-            <div class=" p-4 w-full max-w-md max-h-full">
-                <div class=" bg-white rounded-lg shadow">
-                    <button type="button" class="absolute top-3 end-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center">
-                        <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
-                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
+        <div className={`${bg ? '' : 'bg-gray-800'} fixed top-0 left-0 bg-opacity-20 z-30 justify-center items-center flex w-full h-full`}>
+            <div className=" p-4 w-full max-w-md max-h-full">
+                <div className=" bg-white rounded-lg shadow">
+                    <button type="button" className="absolute top-3 end-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center">
+                        <svg className="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
+                            <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
                         </svg>
-                        <span class="sr-only">Close modal</span>
                     </button>
-                    <div class="p-4 md:p-5 text-center">
-                        <svg class="mx-auto mb-4 text-gray-400 w-12 h-12 " aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
-                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 11V6m0 8h.01M19 10a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/>
+                    <div className="p-4 md:p-5 text-center">
+                        <svg className="mx-auto mb-4 text-gray-400 w-12 h-12 " aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
+                            <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10 11V6m0 8h.01M19 10a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/>
                         </svg>
-                        <h3 class="mb-5 text-lg font-normal text-gray-500 ">Are you sure you want to delete this product?</h3>
-                        <button type="button" class="text-white bg-blue-600 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 d-800 font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center me-2">
-                            Yes, I'm sure
-                        </button>
-                        <button type="button" class="text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 ">
-                            No, cancel
-                        </button>
+                        <h3 className="mb-5 text-lg font-normal text-gray-500 "> {langs.text} </h3>
+                        
+                        <div className="flex space-x-3">
+                            <SubmitButton text={langs.yes} fun={yesFun} link={`/cours/destroy/${id}`} bgColor={PrimaryColor} color={"white"} />
+                            <SubmitButton text={langs.no} fun={noFun} link={""} bgColor={"white"} border={true} color={"gray"} />
+                        </div>
                     </div>
                 </div>
             </div>
+        </div>
+    )
+}
+
+
+
+export const GroupeCard = ({data, setDetails, type, select, selected, deleteFun}) => {
+    let group = <button 
+            className="w-80 bg-blue-100 hover:shadow-lg transition-all px-4 py-6 rounded-md flex mx-2 my-2 items-center"
+            onClick={()=> setDetails(data)} 
+        >
+            <h1 className=" font-medium"> {data?.nom} </h1>
+        </button>
+
+    type === 1 && (group = <button
+            onClick={()=> select(data?.id)}
+            className={`w-full ${selected === data?.id ? 'bg-blue-600 text-white' : 'bg-blue-100'} hover:shadow-lg transition-all px-4 py-6 rounded-md text-left mx-2 my-2 items-center`}
+        > 
+            <h1 className=" font-medium"> {data?.nom} </h1> 
+        </button> 
+    )
+
+    type === 2 && (group = <div
+            className={`bg-blue-100 hover:shadow-lg transition-all px-4 py-6 rounded-md text-left mx-2 my-2 items-center flex justify-between`}
+        > 
+            <h1 className=" font-medium"> {data?.nom} </h1> 
+            
+            <button onClick={deleteFun} className="hover:text-red-500 transition-all">
+                Delete
+            </button>
+        </div> 
+    )
+    
+    return group
+}
+
+
+
+export const ListTeachers = ({list, setList}) => {
+    let teachers = GetData("/prof/showAll", true)?.professeurs
+
+    let AddToList = (item) => {
+        setList(oldArray => [...oldArray, item]);
+        console.log("==> List",list);
+    }
+    
+    let RemoveFromList = (item) => {
+        setList(list.filter(item1 => item1.id !== item.id))
+        console.log("==> List",list);
+    }
+
+
+    return (
+        <div className="mt-8">
+            {teachers?.map((item,key)=>(
+                <button 
+                    onClick={()=> list.find((el) => el.id === item.id) ? RemoveFromList(item) : AddToList(item)}
+                    className={`${list.find((el) => el.id === item.id) ? 'bg-blue-500 text-white hover:bg-blue-400' : 'hover:bg-blue-500 hover:text-white'} w-full bg-blue-100 my-4 rounded-md px-6 py-4 flex justify-between transition-all`}
+                    key={key}
+                > 
+                    <h1> {item.nom} {item.prenom} </h1>
+                    <h1> {item.email}</h1>
+                </button>
+            ))}
+        </div>
+    )
+}
+
+export const ListStudents = () => {
+    return (
+        <div>
+            Students
         </div>
     )
 }

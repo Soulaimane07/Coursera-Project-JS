@@ -1,5 +1,5 @@
 import { useState } from "react"
-import { SubmitButton, CloseBtn } from "../Components/Buttons"
+import { SubmitButton, CloseBtn, BackBtn } from "../Components/Buttons"
 import { GetLang, PostData } from "../Components/Functions"
 import { PrimaryColor } from "../Components/Variables";
 
@@ -37,7 +37,7 @@ export const CreateCours = ({setCreateBtn}) => {
                     <div className="mt-6 mb-6 flex items-center justify-center w-full overflow-hidden rounded-md">
                         {logourl ?  
                             <div className='logo'>
-                                <img src={logourl} /> 
+                                <img src={logourl} alt="" /> 
                             </div>
                         :
                             <label htmlFor="dropzone-file" className="flex flex-col items-center justify-center w-full h-40 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-bray-800 hover:bg-gray-100">
@@ -79,7 +79,7 @@ export const CreateCours = ({setCreateBtn}) => {
                 </div>
             </div>
             <div className="flex space-x-4 px-10">
-                <SubmitButton text={lang?.create} link="/cours/create" data={cour} fun={PostData} bgColor={PrimaryColor} color={"white"} condition={image == "" || libelle == "" || desc == "" || dateF == "" || dateL == ""} />
+                <SubmitButton text={lang?.create} link="/cours/create" data={cour} fun={PostData} bgColor={PrimaryColor} color={"white"} condition={image === "" || libelle === "" || desc === "" || dateF === "" || dateL === ""} />
             </div>
         </div>
         </div>
@@ -130,9 +130,98 @@ export const CreateTeacher = ({setCreateBtn}) => {
             </div>
 
             <div className="flex space-x-4 px-10">
-                <SubmitButton link="/prof/create" data={teacher} fun={PostData} text={lang.create} bgColor={PrimaryColor} color={"white"} condition={email == "" || fname == "" || lname == "" || pass == ""} />
+                <SubmitButton link="/prof/create" data={teacher} fun={PostData} text={lang.create} bgColor={PrimaryColor} color={"white"} condition={email === "" || fname === "" || lname === "" || pass === ""} />
             </div>
         </div>
+        </div>
+    )
+}
+
+export const CreateGroupe = ({lang, setCreateBtn}) => {
+    const [nom, setNom] = useState("")
+
+    let groupe = {nom}
+
+    return(
+        <div className="fixed z-20 top-0 left-0 h-screen bg-gray-800 bg-opacity-40 w-full flex justify-end">
+            <div className=" rounded-md bg-white shadow-2xl w-full md:1/2 lg:w-2/6 mx-10 md:mx-20 lg:mx-0 flex flex-col pb-6">
+            <div className="flex-1">
+                <div className=" relative text-center py-4 font-medium text-xl border-b-2 border-gray-500">
+                    <h2>
+                        {lang?.creategroup}
+                    </h2>
+                    <CloseBtn close={setCreateBtn} />
+                </div>
+
+                <div className="px-10 pb-2 mt-6">
+                    <div className="mb-6 flex flex-col">
+                        <label className="mb-1"> {lang?.name} </label>
+                        <input onChange={(e)=> setNom(e.target.value)} type="gName" className="border-2 rounded-md border-gray-300 outline-none px-3 py-1" />
+                    </div>
+
+                </div>
+            </div>
+
+                <div className="flex space-x-4 px-10">
+                    <SubmitButton link="/groupe/create" data={groupe} fun={PostData} text={lang.create} bgColor={PrimaryColor} color={"white"} condition={nom === ""} />
+                </div>
+            </div>
+        </div>
+    )
+}
+
+export const CreateStudent = ({lang, setCreateBtn}) => {
+    const [nom, setNom] = useState("")
+
+    let groupe = {nom}
+
+    return(
+        <div className="fixed z-20 top-0 left-0 h-screen bg-opacity-40 w-full flex justify-end">
+            <div className=" rounded-md bg-white shadow-2xl w-full md:1/2 lg:w-2/6 mx-10 md:mx-20 lg:mx-0 flex flex-col pb-6">
+            <div className="flex-1">
+                <div className=" relative text-center py-4 font-medium text-xl border-b-2 border-gray-500">
+                    <h2>
+                        {lang?.createStudent}
+                    </h2>
+                    <BackBtn back={setCreateBtn} />
+                </div>
+
+                <div className="px-10 pb-2 mt-6">
+                    <div className="mb-6 flex flex-col">
+                        <label className="mb-1"> CIN </label>
+                        <input onChange={(e)=> setNom(e.target.value)} type="text" className="border-2 rounded-md border-gray-300 outline-none px-3 py-1" />
+                    </div>
+                    <div className="mb-6 flex flex-col">
+                        <label className="mb-1"> {lang?.fname} </label>
+                        <input onChange={(e)=> setNom(e.target.value)} type="text" className="border-2 rounded-md border-gray-300 outline-none px-3 py-1" />
+                    </div>
+                    <div className="mb-6 flex flex-col">
+                        <label className="mb-1"> {lang?.lname} </label>
+                        <input onChange={(e)=> setNom(e.target.value)} type="text" className="border-2 rounded-md border-gray-300 outline-none px-3 py-1" />
+                    </div>
+                    <div className="mb-6 flex flex-col">
+                        <label className="mb-1"> {lang?.birth} </label>
+                        <input onChange={(e)=> setNom(e.target.value)} type="date" className="border-2 rounded-md border-gray-300 outline-none px-3 py-1" />
+                    </div>
+                    <div className="mb-6 flex flex-col">
+                        <label className="mb-1"> {lang?.email} </label>
+                        <input onChange={(e)=> setNom(e.target.value)} type="email" className="border-2 rounded-md border-gray-300 outline-none px-3 py-1" />
+                    </div>
+                    <div className="mb-6 flex flex-col">
+                        <label className="mb-1"> {lang?.pass} </label>
+                        <input onChange={(e)=> setNom(e.target.value)} type="password" className="border-2 rounded-md border-gray-300 outline-none px-3 py-1" />
+                    </div>
+                    <div className="mb-6 flex flex-col">
+                        <label className="mb-1"> {lang?.phone} </label>
+                        <input onChange={(e)=> setNom(e.target.value)} type="tel" className="border-2 rounded-md border-gray-300 outline-none px-3 py-1" />
+                    </div>
+                </div>
+            </div>
+
+                <div className="flex space-x-4 px-10">
+                    <SubmitButton link="/groupe/create" data={groupe} fun={PostData} text={lang?.create} bgColor={PrimaryColor} color={"white"} condition={nom === ""} />
+                </div>
+            </div>
         </div>
     )
 }

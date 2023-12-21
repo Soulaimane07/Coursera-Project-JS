@@ -54,6 +54,7 @@ export const SearchFun = (data, item, searchTerm) => {
 
     item === 'libelle' &&( result = data?.filter((item)=> item.libelle?.toLowerCase()?.startsWith(searchTerm?.toLowerCase())))
     item === 'email' &&( result = data?.filter((item)=> item.email?.toLowerCase()?.startsWith(searchTerm?.toLowerCase())))
+    item === 'name' &&( result = data?.filter((item)=> item.nom?.toLowerCase()?.startsWith(searchTerm?.toLowerCase())))
     
     return result
 }
@@ -133,12 +134,11 @@ export const GetData = (link, roal) => {
         axios.get(`${serverURL}${link}`)
             .then(res => {
                 setData(res.data)
-                console.log(res.data);
             })
             .catch(err => {
                 console.log(err);
             })
-    }, [data])
+    }, [])
 
     return data
 }
@@ -154,7 +154,7 @@ export const PostData = (data, spinner, navigate, be, link) => {
         .then(res => {
             spinner(false)
             console.log(res.data);
-            // window.location.reload()
+            window.location.reload()
         })
         .catch(err => {
             spinner(false)
