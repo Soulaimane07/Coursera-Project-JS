@@ -22,7 +22,6 @@ function Group() {
   return (
     <div className='w-full py-10 px-6 md:px-20'>
         <Header title={lang?.groups} create={true} btn={lang?.creategroup} total={groupes?.length || 0} setCreateBtn={setCreateBtn} langSub={langSub} />
-        
 
         {groupes?.length !== 0 
           ? <GroupeBody groupes={groupes} lang={lang} />
@@ -30,7 +29,6 @@ function Group() {
         }
        
         {createBtn && <CreateGroupe lang={lang} setCreateBtn={setCreateBtn} />}
-        
     </div>
   )
 }

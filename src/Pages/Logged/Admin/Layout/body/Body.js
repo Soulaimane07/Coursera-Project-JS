@@ -5,7 +5,7 @@ import { CoursesTable, TeachersTable } from '../../../../../Layout/Tables'
 import { DetailCour, DetailProf, GroupesDetails } from '../../../../../Layout/Details'
 import { UpdateCour, UpdateGroupe, UpdateProf } from '../../../../../Layout/Update'
 import { DeleteData, SearchFun } from '../../../../../Components/Functions'
-import { CreateStudent } from '../../../../../Layout/Create'
+import { CreateStudent, ImportFile } from '../../../../../Layout/Create'
 
 export const CoursBody = ({cours, lang}) => {
   const [detailsCour, setDetailsCour] = useState(null)
@@ -65,12 +65,13 @@ export const TeachersBody = ({teachers, lang}) => {
 export const GroupeBody = ({groupes, lang}) => {
   let spinner = () => {}
 
-  const [layout, setLayout] = useState(1)
+  const [layout, setLayout] = useState(0)
   const [searchTerm, setSearchTerm] = useState('')
 
   const [details, setDetails] = useState(false)
   const [update, setUpdate] = useState(null)
   const [createS, setCreateS] = useState(false)
+  const [importF, setImportF] = useState(false)
 
   const [deleteBtn, setDeleteBtn] = useState(false)
 
@@ -87,9 +88,10 @@ export const GroupeBody = ({groupes, lang}) => {
 
         {deleteBtn && <Alert yesFun={()=> DeleteData(null, spinner, null, null, `/groupe/destroy/${deleteBtn}`)} noFun={()=> setDeleteBtn(false)} bg={false} />}
 
-        {details && <GroupesDetails data={details} lang={lang} setDetails={setDetails} setUpdate={setUpdate} setAffect={setCreateS} setDeleteBtn={setDeleteBtn} />}
+        {details && <GroupesDetails data={details} lang={lang} setDetails={setDetails} setUpdate={setUpdate} setAffect={setCreateS} setDeleteBtn={setDeleteBtn} setImport={setImportF} />}
         {update && <UpdateGroupe data={update} setUpdate={setUpdate} />}
-        {createS && <CreateStudent lang={lang} setCreateBtn={setCreateS} />}
+        {createS && <CreateStudent groupeId={createS} lang={lang} setCreateBtn={setCreateS} />}
+        {importF && <ImportFile title={"Import Students"} lang={lang} setImport={setImportF} />}
     </div>
   )
 }

@@ -172,7 +172,7 @@ export const DetailProf = ({detailsProf, setDetailsProf, setSelectedProf}) => {
     )
 }
 
-export const GroupesDetails = ({lang, data, setDetails, setUpdate, setAffect, setDeleteBtn}) => {
+export const GroupesDetails = ({lang, data, setDetails, setUpdate, setAffect, setDeleteBtn, setImport}) => {
     return(
         <div className="fixed z-20 top-0 left-0 h-screen bg-gray-800 bg-opacity-40 w-full flex justify-end">
             <div className=" rounded-md h-full bg-white shadow-2xl w-full md:1/2 lg:w-2/6 mx-10 md:mx-20 lg:mx-0">
@@ -197,7 +197,10 @@ export const GroupesDetails = ({lang, data, setDetails, setUpdate, setAffect, se
                     </div>
 
                     <div className="flex flex-col space-y-2 px-10">
-                        <SubmitButton text={lang?.createStudent} fun={()=> setAffect(true)} link={`/prof/destroy/${data?.id}`} bgColor={PrimaryColor} color={"white"} />
+                        <div className="flex space-x-2">
+                            <SubmitButton text={lang?.createStudent} fun={()=> setAffect(data?.id)} link={`/prof/destroy/${data?.id}`} bgColor={PrimaryColor} color={"white"} />
+                            <SubmitButton text={"Import Excel file"} fun={()=> setImport(true)} link={`/prof/destroy/${data?.id}`} bgColor={PrimaryColor} color={"white"} />
+                        </div>
                         <div className="flex space-x-2">
                             <SubmitButton text={lang?.delete} fun={()=> setDeleteBtn(data?.id)} link={`/groupe/destroy/${data?.id}`} bgColor={PrimaryColor} color={"white"} />
                             <SubmitButton text={lang?.update} fun={()=> setUpdate(data)} bgColor={PrimaryColor} color={"white"} />

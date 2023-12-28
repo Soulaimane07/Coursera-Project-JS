@@ -194,13 +194,9 @@ export const UpdateData = (data, spinner, navigate, be, link) => {
 
 export const SubmitCertificate = (data, spinner, navigate, be, link) => {
     spinner(true)
-    // console.log(data);
 
     axios.post(`${serverURL}/pdf`, data, {headers: {"Content-Type": "multipart/form-data"}})
         .then(res => {
-            console.log(res.data);
-            let pdf = res.data
-            // console.log()
             spinner(false)
             be(res.data)
         })

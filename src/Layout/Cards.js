@@ -31,7 +31,7 @@ const AffectGroupes = ({selected, setSelected}) => {
         <div className="mt-4">
             <SearchBox placeholder={langs?.placeholder} setSearchTerm={setSearchTerm} width={1} />
             
-            <ul className="mt-6 overflow-y-scroll overflow-x-hidden h-full pb-14">
+            <ul className="mt-4 pt-2 overflow-x-scroll h-screen pr-4 pb-80">
                 {SearchFun(groupes, 'name', searchTerm)?.map((item,key)=>(
                     <GroupeCard data={item} key={key} type={1} select={setSelected} selected={selected}  />
                 ))}
@@ -51,7 +51,7 @@ const AffectCour = ({selected, setSelected}) => {
         <div className="mt-4">
             <SearchBox placeholder={langs?.placeholder} setSearchTerm={setSearchTerm} width={1} />
             
-            <ul className="mt-6 overflow-y-scroll h-full">
+            <ul className="mt-4 pt-4 overflow-x-scroll h-screen pr-2 pb-80">
                 {SearchFun(cours?.cours, 'libelle', searchTerm)?.map((item,key)=>(
                     <AdminCour item={item} key={key} affect={1} selectedCour={selected} setDetailsCour={setSelected} />
                 ))}
