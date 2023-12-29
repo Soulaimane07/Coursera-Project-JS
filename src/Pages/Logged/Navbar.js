@@ -15,9 +15,6 @@ function Navbar({pages}) {
    const [openNav, setOpenNav] = useState(false)
    const [openOptions, setOpenOptions] = useState(false)
 
-
-
-
   return (
       <nav 
       // style={{backgroundColor: PrimaryColor}} 
@@ -72,7 +69,7 @@ function Navbar({pages}) {
 
                         <div className={`${openOptions ? 'inline' : 'hidden'} ${langSub === "ar" ? 'left-0' : 'right-0'} flex flex-col space-y-1 px-4 py-2 text-sm text-gray-700 absolute  z-10 mt-2 w-56 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none`} role="menu" aria-orientation="vertical" aria-labelledby="user-menu-button">
                            <Link to={"/profile"} className='py-2' >
-                              <h1> {user?.fname} {user?.lname} </h1>
+                              <h1> {user?.fname || user?.prenom} {user?.lname || user?.nom} </h1>
                               <h2> {user?.email} </h2>
                            </Link>
                            
@@ -115,7 +112,7 @@ function Navbar({pages}) {
             <div className="border-t border-gray-700 pb-3 pt-4">
                <Link to={"/profile"} className="flex items-center px-2">
                   <div className="ml-3 w-full">
-                     <div className="text-base font-medium leading-none text-white mb-2 "> {user?.fname} {user?.fname} </div>
+                     <div className="text-base font-medium leading-none text-white mb-2 "> { user?.fname || user?.prenom} {user?.lname || user?.nom} </div>
                      <div className="text-sm font-medium leading-none text-gray-400"> {user?.email} </div>
                   </div>
                </Link>

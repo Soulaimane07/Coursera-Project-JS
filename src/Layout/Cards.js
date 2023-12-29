@@ -343,3 +343,22 @@ export const ListStudents = () => {
         </div>
     )
 }
+
+
+export const StudentCard = ({item}) => {
+    return(
+        <div className="mb-4 bg-blue-100 hover:bg-white transition-all cursor-default px-4 py-4 rounded-md hover:shadow-lg flex ">
+            <div className="flex-1 flex flex-col space-y-1">
+                <h1> CIN: {item?.cin} </h1>
+                <h1> Nom: {item?.nom} </h1>
+                <h1> Prenom: {item?.prenom} </h1>
+            </div>
+            <div className="flex-1 flex flex-col space-y-1">
+                <h1> Date: {item?.dateNaissance} </h1>
+                <h1> Email: {item?.email} </h1>
+                <h1> Tel: {item?.numTele} </h1>
+            </div>
+        </div>
+    )
+}
+

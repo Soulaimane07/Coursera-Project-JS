@@ -72,8 +72,56 @@ export const LoginFun = (data, spinner, navigate, message) => {
         .then(res => {
             if(res.data.status === "success"){
                 spinner(false)
-                console.log(res.data)
+                console.log(res)
                 localStorage.setItem("CourseraUser", JSON.stringify(res.data.user))
+                navigate("/")
+                window.location.reload()
+            } else {
+                console.log(res);
+                spinner(false)
+            }
+        })
+        .catch(err => {
+            console.log(err);
+            message("Email or password are wrong !")
+            spinner(false)
+        })
+}
+
+export const LoginFunEtud = (data, spinner, navigate, message) => {
+    spinner(true)
+    message(false)
+
+    axios.post(`${serverURL}/loginEtud`, data)
+        .then(res => {
+            if(res.data.status === "success"){
+                spinner(false)
+                console.log(res)
+                localStorage.setItem("CourseraUser", JSON.stringify({...res.data.user, 'role': 'etudiant'}))
+                navigate("/")
+                window.location.reload()
+            } else {
+                console.log(res);
+                spinner(false)
+            }
+        })
+        .catch(err => {
+            console.log(err);
+            message("Email or password are wrong !")
+            spinner(false)
+        })
+}
+
+export const LoginFunProf = (data, spinner, navigate, message) => {
+    spinner(true)
+    message(false)
+
+    axios.post(`${serverURL}/loginProf`, data)
+        .then(res => {
+            if(res.data.status === "success"){
+                spinner(false)
+                console.log(res)
+                localStorage.setItem("CourseraUser", JSON.stringify({...res.data.user, 'role': 'prof'}))
                 navigate("/")
                 window.location.reload()
             } else {

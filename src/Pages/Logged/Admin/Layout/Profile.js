@@ -12,7 +12,6 @@ function Profile({pageTitle}) {
   let lang = GetLang()?.data
   let user = getUserData() 
 
-
   return (
     <div className='w-full py-10 px-6 md:px-20'>
         <ProfileHeader user={user} />
@@ -25,11 +24,11 @@ function Profile({pageTitle}) {
                 </div>
                 <div className='mb-4'>
                     <label className='text-gray-500 font-medium'> {lang?.form.fname} </label>
-                    <h1 className='text-lg font-medium'> {user?.fname} </h1>
+                    <h1 className='text-lg font-medium'> {user?.fname || user?.prenom} </h1>
                 </div>
                 <div className='mb-4'>
                     <label className='text-gray-500 font-medium'> {lang?.form.lname} </label>
-                    <h1 className='text-lg font-medium'> {user?.lname} </h1>
+                    <h1 className='text-lg font-medium'> {user?.lname || user?.nom} </h1>
                 </div>
 
                 <div className='px-10 mt-6'>

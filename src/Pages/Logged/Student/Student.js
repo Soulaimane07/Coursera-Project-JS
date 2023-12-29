@@ -7,6 +7,7 @@ import Something from '../Something'
 import { GetLang } from '../../../Components/Functions'
 import Courses from '../Student/Layout/Courses'
 import Profile from '../Admin/Layout/Profile'
+import Footer from '../Footer'
 
 function Student() {
   let lang = GetLang()?.data.dashboard
@@ -20,7 +21,7 @@ function Student() {
 
   return (
     <BrowserRouter>
-      <div className=' h-screen text-gray-900 mt-16'>
+      <div className='min-h-screen mt-20'>
         <Navbar pages={pages} />
         <Routes>
           <Route path='/' element={<Home />} />
@@ -29,6 +30,7 @@ function Student() {
           <Route path='/*' element={<Something />} />
         </Routes>
       </div>
+      <Footer pages={pages} />
     </BrowserRouter>
   )
 }

@@ -22,7 +22,7 @@ function Courses() {
 
       <div className='flex flex-row justify-between items-center mt-10'>
           <SearchBox placeholder={"Search by cour title"} setSearchTerm={setSearchTerm} />
-          <Layout layout={layout} setLayout={setLayout} />
+          <Layout lang={lang} layout={layout} setLayout={setLayout} />
       </div>
 
       <div className='courses mt-10 flex flex-wrap justify-center'>
@@ -32,7 +32,6 @@ function Courses() {
 
       {detailsCour && <DetailCour detailsCour={detailsCour} setDetailsCour={setDetailsCour} setSubmitCour={setSubmitCour} />}
       {submitCour && <SubmitCourBox detailsCour={submitCour} setDetailsCour={setSubmitCour}  />}
-      
     </div>
   )
 }

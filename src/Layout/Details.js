@@ -1,11 +1,11 @@
 import { PrimaryColor, uploadsURL } from "../Components/Variables";
 import { CloseBtn, SubmitButton } from "../Components/Buttons";
-import { DeleteData, GetLang, PostData, getUserData } from "../Components/Functions";
+import { DeleteData, GetData, GetLang, PostData, getUserData } from "../Components/Functions";
 import { AdminCour } from "./Cours";
-import { Alert, GroupeCard } from "./Cards";
+import { Alert, GroupeCard, StudentCard } from "./Cards";
 import { useState } from "react";
 
-export const DetailCour = ({detailsCour, setDetailsCour, setUpdateCour, setSubmitCour}) => {
+export const DetailCour = ({detailsCour, setDetailsCour, setUpdateCour, setSubmitCour, setUpdate}) => {
     let lang = GetLang()?.data.courses
     let userRole = getUserData()?.role
 
@@ -25,7 +25,12 @@ export const DetailCour = ({detailsCour, setDetailsCour, setUpdateCour, setSubmi
                 </>
             )
         }
-        if(userRole === "professeur"){
+        if(userRole === "prof"){
+            result = (
+                <>
+                    <SubmitButton text={"Modifier la date fin"} fun={()=> setUpdate(detailsCour)} bgColor={PrimaryColor} color={"white"} />
+                </>
+            )
         }
         
         return result
@@ -173,6 +178,9 @@ export const DetailProf = ({detailsProf, setDetailsProf, setSelectedProf}) => {
 }
 
 export const GroupesDetails = ({lang, data, setDetails, setUpdate, setAffect, setDeleteBtn, setImport}) => {
+    let students = GetData(`/groupe/${data?.id}/getEtudiants`)?.etudiants
+    
+    
     return(
         <div className="fixed z-20 top-0 left-0 h-screen bg-gray-800 bg-opacity-40 w-full flex justify-end">
             <div className=" rounded-md h-full bg-white shadow-2xl w-full md:1/2 lg:w-2/6 mx-10 md:mx-20 lg:mx-0">
@@ -190,8 +198,10 @@ export const GroupesDetails = ({lang, data, setDetails, setUpdate, setAffect, se
                                 <h1> {data?.nom} </h1>
                             </div> 
                             <div className="mb-6">
-                                <label className="text-lg font-medium"> {lang?.students} (0) </label>
-                                {/* <h1> {data?.nom} </h1> */}
+                                <h1 className="text-lg font-medium mb-2"> {lang?.students} ( {students?.length || 0} ) </h1>
+                                {students?.map((item,key)=>(
+                                    <StudentCard key={key} item={item} />
+                                ))}
                             </div> 
                         </div>
                     </div>

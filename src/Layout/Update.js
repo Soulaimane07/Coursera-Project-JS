@@ -162,3 +162,36 @@ export const UpdateGroupe = ({data, setUpdate}) => {
         </div>
     )
 }
+
+
+export const UpdateDate = ({data, setUpdate}) => {
+    let lang = GetLang()?.data.courses
+console.log(data);
+
+    const [date, setDate] = useState(data?.dateFin)
+
+
+    return(
+        <div className="fixed z-20 top-0 left-0 h-screen bg-opacity-40 w-full flex justify-end">
+            <div className=" rounded-md bg-white shadow-2xl w-full md:1/2 lg:w-2/6 mx-10 md:mx-20 lg:mx-0 flex flex-col pb-6">
+                <div className="flex-1">
+                    <div className=" relative text-center py-4 font-medium text-xl border-b-2 border-gray-500">
+                        <h2>{lang.update}</h2>
+                        <BackBtn back={setUpdate} />
+                    </div>
+
+                    <div className="px-10 pb-2 mt-6">
+                        <div className="mb-6 flex flex-col">
+                            <label className="mb-1"> {lang?.name} </label>
+                            <input value={date} onChange={(e)=> setDate(e.target.value)} type="date" className="border-2 rounded-md border-gray-300 outline-none px-3 py-1" />
+                        </div>
+                    </div>
+                </div>
+                
+                <div className="flex space-x-4 px-10">
+                    <SubmitButton link={`/cours/update/${data?.id}`} data={{dateFin: date}} fun={UpdateData} text={lang?.update} bgColor={PrimaryColor} color={"white"} condition={date === ""} />
+                </div> 
+            </div>
+        </div>
+    )
+}

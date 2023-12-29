@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { PrimaryColor, WebsiteLogoBlue } from '../../../Components/Variables'
 import { SubmitButton } from '../../../Components/Buttons'
-import { LoginFun, GetLang } from '../../../Components/Functions'
+import { LoginFun, GetLang, LoginFunProf, LoginFunEtud } from '../../../Components/Functions'
 import { FooterBox } from '../../../Components/LanguageBox'
 
 function Login() {
@@ -13,6 +13,11 @@ function Login() {
    let lang = GetLang()?.data.login
    let langSub = GetLang()?.subTitle
 
+
+   let fun 
+   role === "0" && (fun = LoginFun)
+   role === "1" && (fun = LoginFunEtud)
+   role === "2" && (fun = LoginFunProf)
 
   return (
     <div className={`flex  h-screen w-full overflow-hidden ${langSub === "ar" ? 'text-right flex-row-reverse' : 'text-left md:flex-row'}`}>
@@ -27,9 +32,9 @@ function Login() {
                     <label className=' font-semibold mb-2'> {lang.role} </label>
                     <select onChange={(e)=> setRole(e.target.value)} className='border-2 w-full rounded-md border-gray-200 hover:border-gray-300 transition-all focus:border-blue-600 outline-none px-4 py-2'>
                         <option></option>
-                        <option id="etudiant" className={langSub === "ar" ? 'text-right' : 'text-left'}> {lang.student} </option>
-                        <option id="professeur" className={langSub === "ar" ? 'text-right' : 'text-left'}> {lang.professeur} </option>
-                        <option id="responsable" className={langSub === "ar" ? 'text-right' : 'text-left'}> {lang.responsable} </option>
+                        <option value="0" className={langSub === "ar" ? 'text-right' : 'text-left'}> {lang.responsable} </option>
+                        <option value="1" className={langSub === "ar" ? 'text-right' : 'text-left'}> {lang.student} </option>
+                        <option value="2" className={langSub === "ar" ? 'text-right' : 'text-left'}> {lang.professeur} </option>
                     </select>
                 </div>
                 
@@ -42,7 +47,7 @@ function Login() {
                     <input className='border-2 w-full rounded-md border-gray-200 hover:border-gray-300 transition-all focus:border-blue-600 outline-none px-4 py-2' onChange={(e)=> setPassword(e.target.value)} type="password" name="floating_password" id="floating_password"  required />
                 </div>
 
-                <SubmitButton fun={LoginFun} text={lang.login} bgColor={PrimaryColor} color={"white"} data={{email, password}} condition={email == "" || password == "" || role == ""} message={setMessage} />
+                <SubmitButton fun={fun} text={lang.login} bgColor={PrimaryColor} color={"white"} data={{email, password}} condition={email == "" || password == "" || role == ""} message={setMessage} />
 
                 <FooterBox />
             </div>

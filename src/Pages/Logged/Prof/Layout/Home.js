@@ -7,18 +7,20 @@ function Home() {
   PageTitle('Professeur - Dashboard')
   let lang = GetLang()?.data.dashboard
 
+  let courses = GetData("/cours/index")?.cours
+  let groupes = GetData("/groupe/index")?.groupes
 
   const cards =[
     {
       "logo": "./assets/images/cours.png", 
       "title": lang?.cours,
-      "total": 0,
+      "total": courses?.length,
       "link":"/courses"
     },
     {
       "logo": "./assets/images/student.png", 
       "title": lang?.groups,
-      "total": 0,
+      "total": groupes?.length,
       "link":"/groups"
     }
   ]
